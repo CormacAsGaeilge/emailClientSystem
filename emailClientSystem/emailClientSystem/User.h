@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <stack>
+#include <vector>
 class User
 {
 public:
@@ -17,5 +19,6 @@ public:
 
 private:
 	std::string name, password, emailAddress;
+	std::stack<Email, std::vector<Email>> inbox;
 };
 
