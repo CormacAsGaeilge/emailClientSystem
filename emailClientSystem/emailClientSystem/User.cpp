@@ -58,11 +58,43 @@ void User::printInbox()
 Email User::searchEmailUsingSubject(std::string userInput)
 {
 	Email email;
+	
 
-	email.getSubject();
+	std::stack<Email, std::vector<Email>> tempInbox;
+	size_t size = User::inbox.size();
+	while (size > 0)
+	{
+		if (User::inbox.top().getSubject() == userInput)
+			email = inbox.top();
+		tempInbox.push(User::inbox.top());
+		User::inbox.pop();
+		size = User::inbox.size();
+	}
 
 	//loop through subjects 
 	//match subject
 
-	return std::cout << email.getSubject << std::endl;
+	return email;
+}
+
+std::vector<Email> User::searchEmailUsingSubjectReturnAll(std::string userInput)
+{
+	
+	std::vector<Email> allEmails;
+
+	std::stack<Email, std::vector<Email>> tempInbox;
+	size_t size = User::inbox.size();
+	while (size > 0)
+	{
+		if (User::inbox.top().getSubject() == userInput)
+			allEmails.push_back(User::inbox.top());
+		tempInbox.push(User::inbox.top());
+		User::inbox.pop();
+		size = User::inbox.size();
+	}
+
+	//loop through subjects 
+	//match subject
+
+	return allEmails;
 }

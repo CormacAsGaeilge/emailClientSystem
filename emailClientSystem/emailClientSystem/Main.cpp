@@ -21,9 +21,7 @@ int main()
 	testUser.retriveNewEmail(testEmail4);
 
 
-	testUser.printInbox();
-	cout << "BREAKLINE" <<endl;
-	testUser.printInbox();
+	testUser.searchEmailUsingSubject("Code").print();
 	system("pause");
 	return 0;
 }
