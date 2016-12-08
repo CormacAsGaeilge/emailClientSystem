@@ -24,6 +24,8 @@ public:
 	void createNewEmail(Email email);
 	void retriveNewEmail(Email email);
 	void printInbox();
+	void printOutbox();
+	void printSentbox();
 	//readEmail
 	//markAsUnRead
 	//viewContacts

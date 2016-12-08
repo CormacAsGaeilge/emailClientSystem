@@ -52,3 +52,49 @@ void User::printInbox()
 	}
 
 }
+void User::printOutbox()
+{
+	std::stack<Email, std::vector<Email>> tempOutbox;
+	size_t size = User::outbox.size();
+	while (size > 0)
+	{
+		User::outbox.top().print();
+		std::cout << "_________________________________________" << std::endl;
+		tempOutbox.push(User::outbox.top());
+		User::outbox.pop();
+		size = User::outbox.size();
+	}
+
+	std::cout << "__________________end___________________" << std::endl;
+
+	size = tempOutbox.size();
+	while (size > 0)
+	{
+		User::outbox.push(tempOutbox.top());
+		tempOutbox.pop();
+		size = tempOutbox.size();
+	}
+}
+void User::printSentbox()
+{
+	std::stack<Email, std::vector<Email>> tempSentbox;
+	size_t size = User::sentbox.size();
+	while (size > 0)
+	{
+		User::sentbox.top().print();
+		std::cout << "_________________________________________" << std::endl;
+		tempSentbox.push(User::sentbox.top());
+		User::sentbox.pop();
+		size = User::sentbox.size();
+	}
+
+	std::cout << "__________________end___________________" << std::endl;
+
+	size = tempSentbox.size();
+	while (size > 0)
+	{
+		User::sentbox.push(tempSentbox.top());
+		tempSentbox.pop();
+		size = tempSentbox.size();
+	}
+}
