@@ -20,8 +20,19 @@ int main()
 	Email testEmail4("niall@gmail.com", "Code", "Test Body");
 	testUser.retriveNewEmail(testEmail4);
 
+	Email testEmail5("niall@gmail.com", "Code", "New Body");
+	testUser.retriveNewEmail(testEmail5);
 
-	testUser.searchEmailUsingSubject("Code").print();
+
+	//testUser.searchEmailUsingSubject("Code").print();
+
+	std::vector<Email> mail = testUser.searchEmailUsingSubjectReturnAll("Code");
+
+	for (Email m : mail)
+	{
+		m.print();
+	}
+
 	system("pause");
 	return 0;
 }
