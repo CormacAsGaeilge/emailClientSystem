@@ -26,6 +26,8 @@ public:
 	void printInbox();
 	Email searchEmailUsingSubject(std::string userInput);
 	std::vector<Email> searchEmailUsingSubjectReturnAll(std::string userInput);
+	void printOutbox();
+	void printSentbox();
 	//readEmail
 	//markAsUnRead
 	//viewContacts
