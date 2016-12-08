@@ -41,7 +41,7 @@ public:
 
 private:
 	std::string name, password, emailAddress;
-	std::stack<Email, std::vector<Email>> inbox, outbox;
+	std::stack<Email, std::vector<Email>> inbox, outbox, sentbox;
 	int inboxSize;
 	std::map<std::string, std::string> contactList;
 };
