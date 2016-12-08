@@ -24,6 +24,7 @@ public:
 	void createNewEmail(Email email);
 	void retriveNewEmail(Email email);
 	void printInbox();
+	Email searchEmailUsingSubject(std::string userInput);
 	void printOutbox();
 	void printSentbox();
 	//readEmail

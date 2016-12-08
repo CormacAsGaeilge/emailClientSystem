@@ -1,9 +1,7 @@
 #include <iostream>
 #include "User.h"
 #include "Email.h"
-using namespace std;
 
-void searchEmailUsingSubject(string userInput);
 
 int main()
 {
@@ -13,6 +11,8 @@ int main()
 
 	Email testEmail2("cormac@gmail.com", "Numbers", "Test Body");
 	testUser.retriveNewEmail(testEmail2);
+
+	testUser.searchEmailUsingSubject("Paddy");
 
 	Email testEmail3("charlie@gmail.com", "Graphics", "Test Body");
 	testUser.retriveNewEmail(testEmail3);
@@ -28,12 +28,3 @@ int main()
 	return 0;
 }
 
-//Search EMAIL By Subject
-void searchEmailUsingSubject(string userInput)
-{
-	//get All subjects
-	//Email::getSubject();
-	//loop through subjects 
-	//match subject
-	//return 
-}

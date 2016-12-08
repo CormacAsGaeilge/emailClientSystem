@@ -1,5 +1,6 @@
 #include "User.h"
 #include "Email.h"
+#include <string>
 
 
 User::User():User("defaultName","defaoultPassword","defaultEmailAddress")
@@ -97,4 +98,17 @@ void User::printSentbox()
 		tempSentbox.pop();
 		size = tempSentbox.size();
 	}
+}
+
+//Search EMAIL By Subject
+Email User::searchEmailUsingSubject(std::string userInput)
+{
+	Email email;
+
+	email.getSubject();
+
+	//loop through subjects 
+	//match subject
+
+	return std::cout << email.getSubject << std::endl;
 }
