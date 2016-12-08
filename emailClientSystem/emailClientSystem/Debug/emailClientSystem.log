@@ -1,7 +1,57 @@
 ﻿  User.cpp
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(36): error C3867: 'std::stack<Email,std::vector<Email,std::allocator<_Ty>>>::size': non-standard syntax; use '&' to create a pointer to member
+          with
+          [
+              _Ty=Email
+          ]
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(36): error C2296: '>': illegal, left operand has type 'unsigned int (__thiscall std::stack<Email,std::vector<Email,std::allocator<_Ty>>>::* )(void) const'
+          with
+          [
+              _Ty=Email
+          ]
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(36): error C2297: '>': illegal, right operand has type 'unsigned int (__thiscall std::stack<Email,std::vector<Email,std::allocator<_Ty>>>::* )(void) const'
+          with
+          [
+              _Ty=Email
+          ]
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(38): error C2228: left of '.print' must have class/struct/union
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(40): error C3867: 'std::stack<Email,std::vector<Email,std::allocator<_Ty>>>::top': non-standard syntax; use '&' to create a pointer to member
+          with
+          [
+              _Ty=Email
+          ]
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(41): error C3867: 'std::stack<Email,std::vector<Email,std::allocator<_Ty>>>::pop': non-standard syntax; use '&' to create a pointer to member
+          with
+          [
+              _Ty=Email
+          ]
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(46): error C3867: 'std::stack<Email,std::vector<Email,std::allocator<_Ty>>>::size': non-standard syntax; use '&' to create a pointer to member
+          with
+          [
+              _Ty=Email
+          ]
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(46): error C2296: '>': illegal, left operand has type 'unsigned int (__thiscall std::stack<Email,std::vector<Email,std::allocator<_Ty>>>::* )(void) const'
+          with
+          [
+              _Ty=Email
+          ]
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(46): error C2297: '>': illegal, right operand has type 'unsigned int (__thiscall std::stack<Email,std::vector<Email,std::allocator<_Ty>>>::* )(void) const'
+          with
+          [
+              _Ty=Email
+          ]
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(48): error C3867: 'std::stack<Email,std::vector<Email,std::allocator<_Ty>>>::top': non-standard syntax; use '&' to create a pointer to member
+          with
+          [
+              _Ty=Email
+          ]
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(49): error C3867: 'std::stack<Email,std::vector<Email,std::allocator<_Ty>>>::pop': non-standard syntax; use '&' to create a pointer to member
+          with
+          [
+              _Ty=Email
+          ]
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(64): error C3867: 'Email::getSubject': non-standard syntax; use '&' to create a pointer to member
+c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(64): error C2440: 'return': cannot convert from 'std::basic_ostream<char,std::char_traits<char>>' to 'Email'
+  c:\users\d00169143\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(64): note: No constructor could take the source type, or constructor overload resolution was ambiguous
   Main.cpp
-  Email.cpp
   Generating Code...
-  LINK : C:\Users\d00163463\emailClientSystem\emailClientSystem\Debug\emailClientSystem.exe not found or not built by the last incremental link; performing full link
-  emailClientSystem.vcxproj -> C:\Users\d00163463\emailClientSystem\emailClientSystem\Debug\emailClientSystem.exe
-  emailClientSystem.vcxproj -> C:\Users\d00163463\emailClientSystem\emailClientSystem\Debug\emailClientSystem.pdb (Partial PDB)
