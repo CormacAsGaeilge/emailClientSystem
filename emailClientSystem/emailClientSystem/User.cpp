@@ -32,21 +32,24 @@ void User::retriveNewEmail(Email email)
 void User::printInbox()
 {
 	std::stack<Email, std::vector<Email>> tempInbox;
-
-	while(User::inbox.size > 0)
+	size_t size = User::inbox.size();
+	while( size > 0)
 	{
-		User::inbox.top.print();
+		User::inbox.top().print();
 		std::cout << "_________________________________________" << std::endl;
-		tempInbox.push(User::inbox.top);
-		User::inbox.pop;
+		tempInbox.push(User::inbox.top());
+		User::inbox.pop();
+		size = User::inbox.size();
 	}
 
 	std::cout << "__________________end___________________" << std::endl;
 
-	while (tempInbox.size > 0)
+	size = tempInbox.size();
+	while (size > 0)
 	{
-		User::inbox.push(tempInbox.top);
-		tempInbox.pop;
+		User::inbox.push(tempInbox.top());
+		tempInbox.pop();
+		size = tempInbox.size();
 	}
 
 }
