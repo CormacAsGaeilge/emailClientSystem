@@ -115,6 +115,7 @@
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="Email.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>

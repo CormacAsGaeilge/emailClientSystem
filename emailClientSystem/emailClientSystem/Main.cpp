@@ -1,39 +1,58 @@
 #include <iostream>
 #include "User.h"
 #include "Email.h"
+#include "DynamicArray.h"
+#include <vector>
 
+void populateUsers(DynamicArray<User> *allUsers);
 
 int main()
 {
-	User testUser("Paddy", "password1", "paddy@gmail.com");
-	Email testEmail1("paddy@gmail.com", "Rani", "Test Body");
-	testUser.retriveNewEmail(testEmail1);
+	DynamicArray<User> allUsers(10);
+	populateUsers(&allUsers);
 
-	Email testEmail2("cormac@gmail.com", "Numbers", "Test Body");
-	testUser.retriveNewEmail(testEmail2);
-
-	testUser.searchEmailUsingSubject("Paddy");
-
-	Email testEmail3("charlie@gmail.com", "Graphics", "Test Body");
-	testUser.retriveNewEmail(testEmail3);
-
-	Email testEmail4("niall@gmail.com", "Code", "Test Body");
-	testUser.retriveNewEmail(testEmail4);
-
-	Email testEmail5("niall@gmail.com", "Code", "New Body");
-	testUser.retriveNewEmail(testEmail5);
-
-
-	//testUser.searchEmailUsingSubject("Code").print();
-
-	std::vector<Email> mail = testUser.searchEmailUsingSubjectReturnAll("Code");
-
-	for (Email m : mail)
+	std::string recipient, subject = "email subject line", body = "email content body";
+	int randomUser = 0; //needs to be set to random
+	for (int i = 0; i < allUsers.Count(); i++)
 	{
-		m.print();
+		for (int j = 0; j < 10; j++)
+		{
+			//randomise body and subject too
+			recipient = allUsers[randomUser].getEmailAddress();
+			Email newEmail(recipient, subject, body);
+			allUsers[i].createNewEmail(newEmail);
+		}
 	}
 
+	for (int i = 0; i < allUsers.Count(); i++)
+	{
+		allUsers[i].printOutbox();
+	}
 	system("pause");
 	return 0;
+}
+
+void populateUsers(DynamicArray<User> *allUsers)
+{
+
+	std::string name = "Bob", password = "pa55w0rd", emailAddress = "bob@gmail.com";
+	User u1(name, password, emailAddress);
+    allUsers->AddLast(u1);
+
+	name = "Paddy", password = "password1", emailAddress = "paddy@gmail.com";
+	User u2(name, password, emailAddress);
+	allUsers->AddLast(u2);
+
+	name = "Cormac", password = "wordpass", emailAddress = "cormac@gmail.com";
+	User u3(name, password, emailAddress);
+	allUsers->AddLast(u3);
+
+	name = "Fred", password = "fredpass", emailAddress = "fred@gmail.com";
+	User u4(name, password, emailAddress);
+	allUsers->AddLast(u4);
+
+	name = "Rani", password = "paddy1", emailAddress = "rani@gmail.com";
+	User u5(name, password, emailAddress);
+	allUsers->AddLast(u5);
 }
 
