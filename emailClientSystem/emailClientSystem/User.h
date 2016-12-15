@@ -5,6 +5,8 @@
 #include <map>
 #include <iostream>
 #include "Email.h"
+#include "BoxType.h"
+
 class User
 {
 public:
@@ -23,11 +25,18 @@ public:
 	std::stack<Email, std::vector<Email>> getInbox() { return User::inbox; }
 	void createNewEmail(Email email);
 	void retriveNewEmail(Email email);
-	void printInbox();
-	Email searchEmailUsingSubject(std::string userInput);
-	std::vector<Email> searchEmailUsingSubjectReturnAll(std::string userInput);
+	void printBox(BoxType boxType);
+	/*NO LONGER NEEDED*/
+	/*void printInbox();
 	void printOutbox();
-	void printSentbox();
+	void printSentbox();*/
+	Email searchEmailUsingSubject(std::string userInput);						//needs boxType
+	std::vector<Email> searchEmailUsingSubjectReturnAll(std::string userInput);	//needs boxType
+	Email searchEmailByID(unsigned int userInput, BoxType boxType);			
+	
+	bool deleteEmail(unsigned int emailId, BoxType boxType); 
+	bool emptyDeletedEmails();
+	std::stack<Email, std::vector<Email>>* getBoxType(BoxType boxType);
 	//readEmail
 	//markAsUnRead
 	//viewContacts
@@ -40,12 +49,15 @@ public:
 	//searchBy date
 	//searchBy subject
 	//searchBy presence of attachment
-	//SORT
+	//SORT Quick sort3, shell
 
+
+
+	//C++11 features ifOnce, ifNone, ifAll
 
 private:
 	std::string name, password, emailAddress;
-	std::stack<Email, std::vector<Email>> inbox, outbox, sentbox;
+	std::stack<Email, std::vector<Email>> inbox, outbox, sentbox, deletedbox;
 	int inboxSize;
 	std::map<std::string, std::string> contactList;
 };

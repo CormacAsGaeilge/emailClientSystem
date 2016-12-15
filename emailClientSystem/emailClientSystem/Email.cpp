@@ -6,13 +6,14 @@
 #pragma warning(disable : 4996)
 using namespace std;
 
-Email::Email():Email("defaultAddress", "defaultSubject", "defaultBody")
+Email::Email():Email(1111,"defaultAddress", "defaultSubject", "defaultBody")
 {
 
 }
 
-Email::Email(std::string recipient, std::string subject, std::string body)
+Email::Email(unsigned int id, std::string recipient, std::string subject, std::string body)
 {
+	Email::setId(id);
 	Email::setRecipient(recipient);
 	Email::setSubject(subject);
 	Email::setBody(body);
@@ -31,7 +32,8 @@ std::time_t Email::getDate()
 void Email::print()
 {
 	
-	std::cout << "Date: " << put_time(localtime(&date), "%F %T") << endl;
+	cout << "ID: " << id << endl;
+	cout << "Date: " << put_time(localtime(&date), "%F %T") << endl;
 	cout << "Recipient: " << recipient << endl;
 	cout << "Subject: " << subject << endl;
 	cout << "_______________________________" << endl;

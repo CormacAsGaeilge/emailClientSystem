@@ -7,15 +7,17 @@ class Email
 {
 public:
 	Email();
-	Email(std::string recipient, std::string subject, std::string body);
+	Email(unsigned int id, std::string recipient, std::string subject, std::string body);
 	~Email();
 
 	//Add Validation
+	void setId(unsigned int id) { Email::id = id; }
 	void setRecipient(std::string recipient) { Email::recipient = recipient; }
 	void setSubject(std::string subject) { Email::subject = subject; }
 	void setBody(std::string body) { Email::body = body; }
 	void print();
 
+	unsigned int getId() { return Email::id; }
 	std::string getRecipient() { return Email::recipient; }
 	std::string getSubject() { return Email::subject; }
 	std::string getBody() { return Email::body; }
@@ -25,6 +27,7 @@ public:
 
 	//Add other variables/setters/getters
 private:
+	unsigned int id;
 	std::string recipient, subject, body;
 	std::time_t date;
 };

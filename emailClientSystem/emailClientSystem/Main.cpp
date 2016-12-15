@@ -4,13 +4,35 @@
 #include "DynamicArray.h"
 #include <vector>
 
-void populateUsers(DynamicArray<User> *allUsers);
+void populateUsers(DynamicArray<User> &allUsers);
+void populateEmails(DynamicArray<User> &allUsers);
+void demoReadAllInbox(DynamicArray<User> &allUsers);
 
 int main()
 {
-	DynamicArray<User> allUsers(10);
-	populateUsers(&allUsers);
+	DynamicArray<User> allUsers(5);
+	populateUsers(allUsers);
 
+	populateEmails(allUsers);
+
+	demoReadAllInbox(allUsers);
+
+
+	system("pause");
+	return 0;
+}
+
+void demoReadAllInbox(DynamicArray<User> &allUsers)
+{
+	for (int i = 0; i < allUsers.Count(); i++)
+	{
+		allUsers[i].printBox(OutboxType);
+	}
+}
+
+void populateEmails(DynamicArray<User> &allUsers)
+{
+	unsigned int id = 1;
 	std::string recipient, subject = "email subject line", body = "email content body";
 	int randomUser = 0; //needs to be set to random
 	for (int i = 0; i < allUsers.Count(); i++)
@@ -19,40 +41,33 @@ int main()
 		{
 			//randomise body and subject too
 			recipient = allUsers[randomUser].getEmailAddress();
-			Email newEmail(recipient, subject, body);
-			allUsers[i].createNewEmail(newEmail);
+			allUsers[i].createNewEmail(Email(id, recipient, subject, body));
+			id++;
 		}
 	}
-
-	for (int i = 0; i < allUsers.Count(); i++)
-	{
-		allUsers[i].printOutbox();
-	}
-	system("pause");
-	return 0;
 }
 
-void populateUsers(DynamicArray<User> *allUsers)
+void populateUsers(DynamicArray<User> &allUsers)
 {
 
 	std::string name = "Bob", password = "pa55w0rd", emailAddress = "bob@gmail.com";
 	User u1(name, password, emailAddress);
-    allUsers->AddLast(u1);
+    allUsers.Add(u1,0);
 
 	name = "Paddy", password = "password1", emailAddress = "paddy@gmail.com";
 	User u2(name, password, emailAddress);
-	allUsers->AddLast(u2);
+	allUsers.Add(u2,1);
 
 	name = "Cormac", password = "wordpass", emailAddress = "cormac@gmail.com";
 	User u3(name, password, emailAddress);
-	allUsers->AddLast(u3);
+	allUsers.Add(u3,2);
 
 	name = "Fred", password = "fredpass", emailAddress = "fred@gmail.com";
 	User u4(name, password, emailAddress);
-	allUsers->AddLast(u4);
+	allUsers.Add(u4,3);
 
 	name = "Rani", password = "paddy1", emailAddress = "rani@gmail.com";
 	User u5(name, password, emailAddress);
-	allUsers->AddLast(u5);
+	allUsers.Add(u5,4);
 }
 
