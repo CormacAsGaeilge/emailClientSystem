@@ -41,6 +41,7 @@ public:
 	//markAsUnRead
 	//viewContacts
 	//AddToContacts
+	void addContact();
 	//RemoveFromContacts
 	//CreateNewEmail - choose contact - create email object
 	//SendEmail -  "send" to contact

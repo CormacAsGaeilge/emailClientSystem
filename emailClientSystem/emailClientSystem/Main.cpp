@@ -7,6 +7,7 @@
 void populateUsers(DynamicArray<User> &allUsers);
 void populateEmails(DynamicArray<User> &allUsers);
 void demoReadAllInbox(DynamicArray<User> &allUsers);
+void menu();
 
 int main()
 {
@@ -17,6 +18,7 @@ int main()
 
 	demoReadAllInbox(allUsers);
 
+	//menu();
 
 	system("pause");
 	return 0;
@@ -69,5 +71,34 @@ void populateUsers(DynamicArray<User> &allUsers)
 	name = "Rani", password = "paddy1", emailAddress = "rani@gmail.com";
 	User u5(name, password, emailAddress);
 	allUsers.Add(u5,4);
+}
+
+void menu()
+{
+	int answer;
+
+	std::cout << "(1) Inbox" << std::endl;
+	std::cout << "(2) Outbox" << std::endl;
+	std::cout << "(3) Sent" << std::endl;
+	std::cout << "(4) Deleted" << std::endl;
+
+
+	
+	std::cin >> answer;
+	switch (answer)
+	{
+	case 1:
+		break;
+
+	case 2:
+		break;
+
+	case 3:
+		break;
+
+	default:
+		std::cout << "Bad choice! Please try again later.\n";
+	}
+
 }
 

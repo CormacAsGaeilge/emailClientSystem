@@ -1,5 +1,6 @@
 #include "User.h"
 #include "Email.h"
+#include "DynamicArray.h"
 #include <string>
 
 User::User():User("defaultName","defaoultPassword","defaultEmailAddress")
@@ -231,10 +232,32 @@ bool User::deleteEmail(unsigned int emailId, BoxType boxType)
 		return true;
 }
 
-
+//Empty's deletedbox 
 bool User::emptyDeletedEmails()
 {
-	return false; //Not yet implemented
+	std::stack<Email, std::vector<Email>>* box = User::getBoxType(DeletedboxType);
+	size_t size = box->size();
+	while (size > 0)
+	{
+		box->pop();
+		size = box->size();
+	}
+	return true;
+}
+
+void User::addContact()
+{
+	//not efficent 
+	//need to check for duplicates.
+	//comming back to this function - TO-DO only loop through users, push users into the Hash map 
+	std::vector<User> allUsers;
+	std::string name, address;
+	size_t size = User::inbox.size();
+	while (size > 0)
+	{
+		name = User::getName(); address = User::getEmailAddress();
+		contactList.insert(name, address);
+	}
 }
 
 //used for choosing which box to make changes to

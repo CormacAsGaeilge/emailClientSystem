@@ -1,3 +1,21 @@
-﻿  Main.cpp
-  emailClientSystem.vcxproj -> C:\Users\d00169143\emailClientSystem\emailClientSystem\Debug\emailClientSystem.exe
-  emailClientSystem.vcxproj -> C:\Users\d00169143\emailClientSystem\emailClientSystem\Debug\emailClientSystem.pdb (Partial PDB)
+﻿  User.cpp
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1252): error C2675: unary '++': 'std::string' does not define this operator or a conversion to a type acceptable to the predefined operator
+  c:\users\iison\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(259): note: see reference to function template instantiation 'void std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::insert<std::string>(_Iter,_Iter)' being compiled
+          with
+          [
+              _Kty=std::string,
+              _Ty=std::string,
+              _Pr=std::less<std::string>,
+              _Alloc=std::allocator<std::pair<const std::string,std::string>>,
+              _Iter=std::string
+          ]
+  c:\users\iison\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(259): note: see reference to function template instantiation 'void std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::insert<std::string>(_Iter,_Iter)' being compiled
+          with
+          [
+              _Kty=std::string,
+              _Ty=std::string,
+              _Pr=std::less<std::string>,
+              _Alloc=std::allocator<std::pair<const std::string,std::string>>,
+              _Iter=std::string
+          ]
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1254): error C2100: illegal indirection
