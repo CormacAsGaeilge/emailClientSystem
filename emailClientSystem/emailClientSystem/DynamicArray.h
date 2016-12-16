@@ -1,5 +1,5 @@
 #pragma once
-
+#include <stdexcept>
 template <typename T>
 class DynamicArray
 {
@@ -28,12 +28,6 @@ private:
 	int count;
 };
 
-/*
-In this example we simply move the code from the CPP to the template class.
-Unlike with TemplatePair where we used an INL include.
-See the comment block at the top of Main for more on this.
-*/
-
 template <typename T>
 DynamicArray<T>::DynamicArray(int length)
 {
@@ -52,29 +46,15 @@ template <typename T>
 void DynamicArray<T>::Grow()
 {
 	int newLength = static_cast<int>(round(length * 1.5));
-
-	//make new array 150% original size
 	T* tempPArray = new T[newLength];
-
-	//copy contents
 	for (int i = 0; i < length; i++)
 	{
 		tempPArray[i] = pArray[i];
 	}
-
-	//free RAM from old array
 	delete[] DynamicArray::pArray;
-
-	//make old pointer, now point to the new array
 	DynamicArray::pArray = tempPArray;
-
-	//reset tempPArray address since its no longer in use
 	tempPArray = nullptr;
-
-	//remember to set the new length
 	length = newLength;
-
-	//blank any new spaces after the data
 	for (int i = count; i < length; i++)
 		pArray[i] = T();
 }

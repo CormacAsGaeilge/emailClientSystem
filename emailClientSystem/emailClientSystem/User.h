@@ -41,7 +41,8 @@ public:
 	//markAsUnRead
 	//viewContacts
 	//AddToContacts
-	void addContact();
+	void addContact(std::vector<User> allUsers);
+	void addContact(User User);
 	//RemoveFromContacts
 	//CreateNewEmail - choose contact - create email object
 	//SendEmail -  "send" to contact

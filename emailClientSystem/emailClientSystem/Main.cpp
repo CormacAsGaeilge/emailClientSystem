@@ -18,6 +18,10 @@ int main()
 
 	demoReadAllInbox(allUsers);
 
+	User testUser("Dan", "123456", "dan@gmail.com");
+	testUser.addContact(allUsers[1]);
+
+
 	//menu();
 
 	system("pause");

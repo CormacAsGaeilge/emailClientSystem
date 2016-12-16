@@ -244,22 +244,18 @@ bool User::emptyDeletedEmails()
 	}
 	return true;
 }
-
-void User::addContact()
+//TO DO - MAKE GENERIC
+void User::addContact(std::vector<User> allUsers)
 {
-	//not efficent 
-	//need to check for duplicates.
-	//comming back to this function - TO-DO only loop through users, push users into the Hash map 
-	std::vector<User> allUsers;
-	std::string name, address;
-	size_t size = User::inbox.size();
-	while (size > 0)
-	{
-		name = User::getName(); address = User::getEmailAddress();
-		contactList.insert(name, address);
-	}
+	int length = allUsers.size();
+	for(int i = 0; i < length; i++)
+		User::addContact(allUsers[i]);
 }
 
+void User::addContact(User user)
+{
+	contactList.insert(std::pair<std::string,std::string>(User::getName(), User::getEmailAddress()));
+}
 //used for choosing which box to make changes to
 std::stack<Email, std::vector<Email>>* User::getBoxType(BoxType boxType)
 {
