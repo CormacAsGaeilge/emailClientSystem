@@ -1,3 +1,11 @@
 ﻿  User.cpp
 c:\users\iison\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(279): error C3867: 'User::getName': non-standard syntax; use '&' to create a pointer to member
 c:\users\iison\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(279): error C3867: 'User::getEmailAddress': non-standard syntax; use '&' to create a pointer to member
+﻿  Email.cpp
+  Generating Code...
+  Compiling...
+  User.cpp
+  Main.cpp
+  Generating Code...
+  emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.exe
+  emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.pdb (Partial PDB)

@@ -14,9 +14,9 @@ public:
 	User(std::string name, std::string password, std::string emailAddress);
 	~User();
 
-	void setName(std::string name) { User::name = name; }
-	void setPassword(std::string password) { User::password = password; }
-	void setEmailAddress(std::string emailAddress) { User::emailAddress = emailAddress; }
+	void setName(std::string name) { User::name = name; } //Length >= 8 
+	void setPassword(std::string password) { User::password = password; } //Length >= 8 characters; Must contain minimum of 1 number and 1 letter(non - case senstive).
+	void setEmailAddress(std::string emailAddress) { User::emailAddress = emailAddress; } //Valid email (regex)
 
 
 	std::string getName() { return User::name; }

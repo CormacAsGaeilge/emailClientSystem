@@ -24,6 +24,9 @@
     <ClCompile Include="Email.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Attachment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BoxType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Attachment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

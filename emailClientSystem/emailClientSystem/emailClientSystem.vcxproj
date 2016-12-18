@@ -110,11 +110,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Attachment.cpp" />
     <ClCompile Include="Email.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Attachment.h" />
     <ClInclude Include="BoxType.h" />
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="Email.h" />

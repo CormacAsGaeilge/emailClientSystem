@@ -40,16 +40,18 @@ void demoReadAllInbox(DynamicArray<User> &allUsers)
 void populateEmails(DynamicArray<User> &allUsers)
 {
 	unsigned int id = 1;
-	std::string recipient, subject = "email subject line", body = "email content body";
+	std::vector<std::string> recipients; 
+	std::string subject = "email subject line", body = "email content body";
 	int randomUser = 0; //needs to be set to random
 	for (int i = 0; i < allUsers.Count(); i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
 			//randomise body and subject too
-			recipient = allUsers[randomUser].getEmailAddress();
-			allUsers[i].createNewEmail(Email(id, recipient, subject, body));
+			recipients.push_back(allUsers[randomUser].getEmailAddress());
+			allUsers[i].createNewEmail(Email(id, allUsers[i].getEmailAddress(), recipients, subject, body));
 			id++;
+			recipients.pop_back();
 		}
 	}
 }
