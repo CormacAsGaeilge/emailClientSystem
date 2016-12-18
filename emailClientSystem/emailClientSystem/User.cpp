@@ -256,6 +256,33 @@ void User::addContact(User user)
 {
 	contactList.insert(std::pair<std::string,std::string>(User::getName(), User::getEmailAddress()));
 }
+
+
+//this functiom should erase by Key
+//First draft erase
+void User::removeContact(std::vector<User> allUsers, std::string name)
+{
+	for(User u : allUsers)
+		if (name == u.getName())
+		{
+			contactList.erase(u.getName());
+		}
+}
+
+//search for a contact
+//should probabnly search through the contact list
+std::map<std::string, std::string> User::searchContact(std::vector<User> allUsers, std::string name)
+{
+	std::map<std::string, std::string> newMap;
+	for (User u : allUsers)
+		if (name == u.getName())
+		{
+			newMap.insert(u.getName(), u.getEmailAddress());
+		}
+
+	return newMap;
+}
+
 //used for choosing which box to make changes to
 std::stack<Email, std::vector<Email>>* User::getBoxType(BoxType boxType)
 {
@@ -267,5 +294,4 @@ std::stack<Email, std::vector<Email>>* User::getBoxType(BoxType boxType)
 		return &sentbox;
 	else
 		return &deletedbox;
-
 }

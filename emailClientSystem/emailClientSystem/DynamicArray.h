@@ -1,5 +1,6 @@
 #pragma once
 #include <stdexcept>
+#include <iostream>
 template <typename T>
 class DynamicArray
 {
@@ -14,8 +15,8 @@ public:
 	void AddLast(const T data);
 	void Print() {
 		for (int i = 0; i < length - 1; i++)
-			cout << pArray[i] << ",";
-		cout << pArray[length - 1] << endl;
+			std::cout << pArray[i] << ",";
+		std::cout << pArray[length - 1] << std::endl;
 	};
 	int Count();
 

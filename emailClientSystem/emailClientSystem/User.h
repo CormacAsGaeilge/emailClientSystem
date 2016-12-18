@@ -44,6 +44,8 @@ public:
 	void addContact(std::vector<User> allUsers);
 	void addContact(User User);
 	//RemoveFromContacts
+	void removeContact(std::vector<User> allUsers, std::string name);
+	std::map<std::string, std::string> searchContact(std::vector<User> allUsers, std::string name);
 	//CreateNewEmail - choose contact - create email object
 	//SendEmail -  "send" to contact
 	//deleteEmail

@@ -3,6 +3,7 @@
 #include "Email.h"
 #include "DynamicArray.h"
 #include <vector>
+#include <iostream>
 
 void populateUsers(DynamicArray<User> &allUsers);
 void populateEmails(DynamicArray<User> &allUsers);
