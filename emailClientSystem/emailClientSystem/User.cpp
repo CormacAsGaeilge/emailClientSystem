@@ -230,6 +230,19 @@ bool User::deleteEmail(unsigned int emailId, BoxType boxType)
 		return true;
 }
 
+bool User::deletedAllEmails(BoxType boxType)
+{
+	std::stack<Email, std::vector<Email>>* box = User::getBoxType(boxType);
+	size_t size = box->size();
+	size_t checkForChange = size;	
+	while (size > 0)
+	{	
+		box->pop();
+		size = box->size();
+	}
+	return true;
+}
+
 //Empty's deletedbox 
 bool User::emptyDeletedEmails()
 {

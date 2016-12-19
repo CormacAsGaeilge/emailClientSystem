@@ -50,6 +50,7 @@ public:
 	Email searchEmailByID(unsigned int userInput, BoxType boxType);			
 	
 	bool deleteEmail(unsigned int emailId, BoxType boxType); 
+	bool deletedAllEmails(BoxType boxType);
 	bool emptyDeletedEmails();
 	std::stack<Email, std::vector<Email>>* getBoxType(BoxType boxType);
 
