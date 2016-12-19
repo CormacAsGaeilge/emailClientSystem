@@ -6,10 +6,17 @@
 #include "Attachment.h"
 class Email
 {
+
+
+	int count = 0;
+
+
 public:
 	Email();
-	Email(unsigned int id, std::string sender, std::vector<std::string> recipients, std::string subject, std::string body); //multi recipient 0 attachment
-	Email(unsigned int id, std::string sender, std::vector<std::string> recipients, std::string subject, std::string body, std::vector<Attachment> attachments); //multi recipient multi attachment
+	Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body); //multi recipient 0 attachment
+	Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body, std::vector<Attachment> attachments); //multi recipient multi attachment
+	Email(std::string sender, std::string subject, std::string body); //multi recipient 0 attachment
+	Email(std::string sender, std::string subject, std::string body, std::vector<Attachment> attachments); //multi recipient multi attachment
 
 	~Email();
 

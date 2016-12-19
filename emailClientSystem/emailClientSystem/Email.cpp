@@ -11,9 +11,9 @@ Email::Email()
 
 }
 
-Email::Email(unsigned int id, std::string sender, std::vector<std::string> recipients, std::string subject, std::string body)
+Email::Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body)
 {
-	Email::setId(id);
+	Email::setId(count++);
 	Email::setSender(sender);
 	Email::setRecipient(recipients);
 	Email::setSubject(subject);
@@ -21,11 +21,30 @@ Email::Email(unsigned int id, std::string sender, std::vector<std::string> recip
 	Email::date = std::time(0);
 }
 
-Email::Email(unsigned int id, std::string sender, std::vector<std::string> recipients, std::string subject, std::string body, std::vector<Attachment> attachments)
+Email::Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body, std::vector<Attachment> attachments)
 {
-	Email::setId(id);
+	Email::setId(count++);
 	Email::setSender(sender);
 	Email::setRecipient(recipients);
+	Email::setSubject(subject);
+	Email::setBody(body);
+	Email::date = std::time(0);
+	Email::setAttachment(attachments);
+}
+
+Email::Email(std::string sender, std::string subject, std::string body)
+{
+	Email::setId(count++);
+	Email::setSender(sender);
+	Email::setSubject(subject);
+	Email::setBody(body);
+	Email::date = std::time(0);
+}
+
+Email::Email(std::string sender, std::string subject, std::string body, std::vector<Attachment> attachments)
+{
+	Email::setId(count++);
+	Email::setSender(sender);
 	Email::setSubject(subject);
 	Email::setBody(body);
 	Email::date = std::time(0);

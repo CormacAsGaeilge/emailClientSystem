@@ -78,6 +78,10 @@ void User::createNewEmail(Email email)
 	User::outbox.push(email);
 }
 
+void User::sendEmail()
+{
+	User::printBox(OutboxType);
+}
 void User::retriveNewEmail(Email email)
 {
 	User::inbox.push(email);
