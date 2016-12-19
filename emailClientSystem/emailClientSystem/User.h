@@ -10,19 +10,8 @@ class User
 {
 
 	int count = 0;
-
-
 	friend std::ostream& operator<<(std::ostream& outStream, const User& user);
 	friend std::istream& operator >> (std::istream& inStream, User& user);
-
-
-
-
-
-
-
-
-
 
 public:
 	User();
@@ -38,16 +27,15 @@ public:
 	std::string getName() { return User::name; }
 	std::string getPassword() { return User::password; }
 	std::string getEmailAddress() { return User::emailAddress; }
-	std::stack<Email, std::vector<Email>> getInbox() { return User::inbox; }
-
+	std::stack<Email*, std::vector<Email*>> getInbox() { return User::inbox; }
 
 	void createNewEmail(Email *email);
 	void User::sendEmail();
 	void retriveNewEmail(Email *email);
 	void printBox(BoxType boxType);
-	Email searchEmailUsingSubject(std::string userInput, BoxType boxType);						//needs boxType
-	std::vector<Email> searchEmailUsingSubjectReturnAll(std::string userInput, BoxType boxType);	//needs boxType
-	Email searchEmailByID(unsigned int userInput, BoxType boxType);			
+	Email* searchEmailUsingSubject(std::string userInput, BoxType boxType);						//needs boxType
+	std::vector<Email*> searchEmailUsingSubjectReturnAll(std::string userInput, BoxType boxType);	//needs boxType
+	Email* searchEmailByID(unsigned int userInput, BoxType boxType);			
 	
 	bool deleteEmail(unsigned int emailId, BoxType boxType); 
 	bool deletedAllEmails(BoxType boxType);

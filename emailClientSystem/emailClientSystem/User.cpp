@@ -95,7 +95,7 @@ void User::printBox(BoxType boxType)
 	std::cout << "_____________________" << boxType << "_____________________" << std::endl;
 	while (size > 0)
 	{
-		box->top().print();
+		box->top()->print();
 		std::cout << "_________________________________________" << std::endl;
 		tempBox.push(box->top());
 		box->pop();
@@ -115,15 +115,15 @@ void User::printBox(BoxType boxType)
 }
 
 //Search EMAIL By Subject
-Email User::searchEmailUsingSubject(std::string userInput, BoxType boxType)
+Email* User::searchEmailUsingSubject(std::string userInput, BoxType boxType)
 {
-	Email email;
-	std::stack<Email, std::vector<Email>>* box = User::getBoxType(boxType), tempBox;
+	Email *email;
+	std::stack<Email*, std::vector<Email*>>* box = User::getBoxType(boxType), tempBox;
 
 	size_t size = box->size();
 	while (size > 0)
 	{
-		if (box->top().getSubject() == userInput)
+		if (box->top()->getSubject() == userInput)
 			email = box->top();
 		tempBox.push(box->top());
 		box->pop();
@@ -144,16 +144,16 @@ Email User::searchEmailUsingSubject(std::string userInput, BoxType boxType)
 	return email;
 }
 
-std::vector<Email> User::searchEmailUsingSubjectReturnAll(std::string userInput, BoxType boxType)
+std::vector<Email*> User::searchEmailUsingSubjectReturnAll(std::string userInput, BoxType boxType)
 {
 	
-	std::vector<Email> allEmails;
-	std::stack<Email, std::vector<Email>>* box = User::getBoxType(boxType), tempBox;
+	std::vector<Email*> allEmails;
+	std::stack<Email*, std::vector<Email*>>* box = User::getBoxType(boxType), tempBox;
 
 	size_t size = User::inbox.size();
 	while (size > 0)
 	{
-		if (box->top().getSubject() == userInput)
+		if (box->top()->getSubject() == userInput)
 			allEmails.push_back(box->top());
 		tempBox.push(box->top());
 		box->pop();
@@ -174,16 +174,16 @@ std::vector<Email> User::searchEmailUsingSubjectReturnAll(std::string userInput,
 
 	return allEmails;
 }
-Email User::searchEmailByID(unsigned int userInput, BoxType boxType)
+Email* User::searchEmailByID(unsigned int userInput, BoxType boxType)
 {
-	Email email;
-	std::stack<Email, std::vector<Email>>* box = User::getBoxType(boxType), tempBox;
+	Email *email;
+	std::stack<Email*, std::vector<Email*>>* box = User::getBoxType(boxType), tempBox;
 
 	size_t size = box->size();
 	//remove emails from stack
 	while (size > 0)
 	{
-		if (box->top().getId() == userInput)
+		if (box->top()->getId() == userInput)
 			email = box->top();
 		tempBox.push(box->top());	//add to the temp box
 		box->pop();					//remove from the box
@@ -204,13 +204,13 @@ Email User::searchEmailByID(unsigned int userInput, BoxType boxType)
 
 bool User::deleteEmail(unsigned int emailId, BoxType boxType)
 {
-	std::stack<Email, std::vector<Email>>* box = User::getBoxType(boxType), tempBox;
+	std::stack<Email*, std::vector<Email*>>* box = User::getBoxType(boxType), tempBox;
 
 	size_t size = box->size();
 	size_t checkForChange = size;			//set to original size
 	while (size > 0)
 	{
-		if (box->top().getId() != emailId)	//If not the email to delete
+		if (box->top()->getId() != emailId)	//If not the email to delete
 			tempBox.push(box->top());		//Add to the tempBox
 		box->pop();					
 		size = box->size();			
@@ -232,7 +232,7 @@ bool User::deleteEmail(unsigned int emailId, BoxType boxType)
 
 bool User::deletedAllEmails(BoxType boxType)
 {
-	std::stack<Email, std::vector<Email>>* box = User::getBoxType(boxType);
+	std::stack<Email*, std::vector<Email*>>* box = User::getBoxType(boxType);
 	size_t size = box->size();
 	size_t checkForChange = size;	
 	while (size > 0)
