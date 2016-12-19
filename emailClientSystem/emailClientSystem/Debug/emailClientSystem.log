@@ -1,5 +1,5 @@
-﻿  Main.cpp
-  Email.cpp
-  Generating Code...
+﻿  User.cpp
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(50): warning C4018: '<=': signed/unsigned mismatch
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(71): warning C4129: '.': unrecognized character escape sequence
   emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.exe
   emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.pdb (Partial PDB)

@@ -11,7 +11,7 @@
 void populateEmails(User &user);
 void deletEmail(User *user);
 void deleteAllEmails(User *user);
-
+void searchBy(User *user);
 void menu(User *user);
 void openUserMenu(User *user);
 void newEmail(User *user);
@@ -145,7 +145,7 @@ void openUserMenu(User *user)
 			break;
 
 		case 5:
-			check = false;
+			searchBy(user);
 			break;
 
 		case 6:
@@ -251,6 +251,90 @@ void deleteAllEmails(User *user)
 	}
 }
 
+void searchBy(User * user)
+{
+	std::cout << "________________Search By________________" << std::endl;
+	bool check = true;
+	std::string userInput;
+	int userId;
+	BoxType boxType;
+
+
+	std::cout << "Choose Which Inbox to search in:\n" << std::endl;
+	while (check)
+	{
+		User currentUser;
+		int answer;
+		std::cout << "(1) Inbox" << std::endl;
+		std::cout << "(2) Outbox" << std::endl;
+		std::cout << "(3) Sentbox" << std::endl;
+		std::cout << "(4) Deleted Emails" << std::endl;
+		std::cin >> answer;
+
+		switch (answer)
+		{
+		case 1:
+			boxType = InboxType;
+			break;
+
+		case 2:
+			boxType = OutboxType;
+			break;
+
+		case 3:
+			boxType = SentboxType;
+			break;
+
+		case 4:
+			boxType = DeletedboxType;
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+
+	}
+
+	check = true;
+
+	while (check)
+	{
+		User currentUser;
+		int answer;
+		std::vector<Email*> temp;
+		std::cout << "(1) Search by id" << std::endl;
+		std::cout << "(2) Search by subject" << std::endl;
+		std::cout << "(3) Search by presence of attachments" << std::endl;
+		std::cout << "(4) Back" << std::endl;
+		std::cin >> answer;
+
+		switch (answer)
+		{
+		case 1:
+			std::cin >> userId;
+			std::cout << user->searchEmailByID(userId, boxType);
+			break;
+
+		case 2:
+			std::cin >> userInput;
+			temp = user->searchEmailUsingSubjectReturnAll(userInput, boxType);
+			for (int i = 0; i < temp.size(); i++)
+				std::cout << temp[i];
+			break;
+
+		case 3:
+			std::cout << user->searchEmailByPresenceOfAttachments(boxType);
+			break;
+
+		case 4:
+			menu(user);
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+	}
+}
 
 void newEmail(User *user)
 {
