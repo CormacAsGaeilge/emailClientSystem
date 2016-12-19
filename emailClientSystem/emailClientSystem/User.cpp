@@ -117,7 +117,7 @@ void User::printBox(BoxType boxType)
 //Search EMAIL By Subject
 Email* User::searchEmailUsingSubject(std::string userInput, BoxType boxType)
 {
-	Email *email;
+	Email *email = nullptr;
 	std::stack<Email*, std::vector<Email*>>* box = User::getBoxType(boxType), tempBox;
 
 	size_t size = box->size();
@@ -176,7 +176,7 @@ std::vector<Email*> User::searchEmailUsingSubjectReturnAll(std::string userInput
 }
 Email* User::searchEmailByID(unsigned int userInput, BoxType boxType)
 {
-	Email *email;
+	Email *email = nullptr;
 	std::stack<Email*, std::vector<Email*>>* box = User::getBoxType(boxType), tempBox;
 
 	size_t size = box->size();
