@@ -41,9 +41,9 @@ public:
 	std::stack<Email, std::vector<Email>> getInbox() { return User::inbox; }
 
 
-	void createNewEmail(Email email);
+	void createNewEmail(Email *email);
 	void User::sendEmail();
-	void retriveNewEmail(Email email);
+	void retriveNewEmail(Email *email);
 	void printBox(BoxType boxType);
 	Email searchEmailUsingSubject(std::string userInput, BoxType boxType);						//needs boxType
 	std::vector<Email> searchEmailUsingSubjectReturnAll(std::string userInput, BoxType boxType);	//needs boxType
@@ -52,7 +52,7 @@ public:
 	bool deleteEmail(unsigned int emailId, BoxType boxType); 
 	bool deletedAllEmails(BoxType boxType);
 	bool emptyDeletedEmails();
-	std::stack<Email, std::vector<Email>>* getBoxType(BoxType boxType);
+	std::stack<Email*, std::vector<Email*>>* getBoxType(BoxType boxType);
 
 	void addContact(std::vector<User> allUsers);
 	void addContact(User User);
@@ -66,7 +66,7 @@ public:
 
 private:
 	std::string name, password, emailAddress;
-	std::stack<Email, std::vector<Email>> inbox, outbox, sentbox, deletedbox;
+	std::stack<Email*, std::vector<Email*>> inbox, outbox, sentbox, deletedbox;
 	int id, inboxSize;
 	std::map<std::string, std::string> contactList;
 };

@@ -66,7 +66,7 @@ void populateEmails(User &user)
 		//randomise body and subject too
 		std::string address = j +"address@gmail.com";
 		recipients.push_back(address);
-		user.createNewEmail(Email(user.getEmailAddress(), recipients, subject, body));
+		user.createNewEmail(new Email(user.getEmailAddress(), recipients, subject, body));
 		recipients.pop_back();
 	}
 }
@@ -288,12 +288,12 @@ void newEmail(User *user)
 				attachments.push_back(Attachment(fileName, fileSuffix));
 			}
 
-			user->createNewEmail(Email(user->getEmailAddress(), recipients, subject, body, attachments));
+			user->createNewEmail(new Email(user->getEmailAddress(), recipients, subject, body, attachments));
 			check = false;
 		}
 		else if (checkAttachment == "N")
 		{
-			user->createNewEmail(Email(user->getEmailAddress(), recipients, subject, body));
+			user->createNewEmail(new Email(user->getEmailAddress(), recipients, subject, body));
 			check = false;
 		}
 		else

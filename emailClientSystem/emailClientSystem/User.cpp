@@ -73,7 +73,7 @@ void User::setEmailAddress(std::string emailAddress)
 }
 	 
 
-void User::createNewEmail(Email email)
+void User::createNewEmail(Email *email)
 {
 	User::outbox.push(email);
 }
@@ -82,14 +82,14 @@ void User::sendEmail()
 {
 	User::printBox(OutboxType);
 }
-void User::retriveNewEmail(Email email)
+void User::retriveNewEmail(Email *email)
 {
 	User::inbox.push(email);
 }
 
 void User::printBox(BoxType boxType)
 {
-	std::stack<Email, std::vector<Email>>* box = User::getBoxType(boxType), tempBox;
+	std::stack<Email*, std::vector<Email*>>* box = User::getBoxType(boxType), tempBox;
 
 	size_t size = box->size();
 	std::cout << "_____________________" << boxType << "_____________________" << std::endl;
@@ -246,7 +246,7 @@ bool User::deletedAllEmails(BoxType boxType)
 //Empty's deletedbox 
 bool User::emptyDeletedEmails()
 {
-	std::stack<Email, std::vector<Email>>* box = User::getBoxType(DeletedboxType);
+	std::stack<Email*, std::vector<Email*>>* box = User::getBoxType(DeletedboxType);
 	size_t size = box->size();
 	while (size > 0)
 	{
@@ -297,7 +297,7 @@ std::map<std::string, std::string> User::searchContact(std::vector<User> allUser
 
 
 //used for choosing which box to make changes to
-std::stack<Email, std::vector<Email>>* User::getBoxType(BoxType boxType)
+std::stack<Email*, std::vector<Email*>>* User::getBoxType(BoxType boxType)
 {
 	if (boxType == InboxType)
 		return &inbox;
