@@ -11,7 +11,15 @@
 void populateUsers(DynamicArray<User> &allUsers);
 void populateEmails(DynamicArray<User> &allUsers);
 void demoReadAllInbox(DynamicArray<User> &allUsers);
-void menu();
+void menu(DynamicArray<User> *allUsers);
+void createUserMenu(DynamicArray<User> *allUsers);
+void openUserMenu(DynamicArray<User> *allUsers);
+void viewAllUsersMenu(DynamicArray<User> *allUsers);
+void deleteUserMenu(DynamicArray<User> *allUsers);
+void createUser(DynamicArray<User> *allUsers);
+//bool login(DynamicArray<User> *allUsers, std::string name, std::string password);
+
+bool login(std::vector<User> allUsers, std::string name, std::string password);
 
 template <typename T>
 void selectionSort(DynamicArray<T> *pArray, int length);
@@ -36,10 +44,10 @@ int main()
 
 	constexpr int N = 4;
 
-	allUsers.Print();
+	//allUsers.Print();
 	//selectionSort(&allUsers, N);
 	//allUsers.Print();
-	//menu();
+	menu(&allUsers);
 
 	system("pause");
 	return 0;
@@ -146,32 +154,228 @@ void populateUsers(DynamicArray<User> &allUsers)
 	allUsers.Add(u5, 4);
 }
 
-void menu()
+void menu(DynamicArray<User> *allUsers)
 {
-	int answer;
-
-	std::cout << "(1) Inbox" << std::endl;
-	std::cout << "(2) Outbox" << std::endl;
-	std::cout << "(3) Sent" << std::endl;
-	std::cout << "(4) Deleted" << std::endl;
-
-
-	
-	std::cin >> answer;
-	switch (answer)
+	bool check = true;
+	while (check)
 	{
-	case 1:
-		break;
+		int answer;
 
-	case 2:
-		break;
+		std::cout << "(1) Create User" << std::endl;
+		std::cout << "(2) Open User" << std::endl;
+		std::cout << "(3) View All Users" << std::endl;
+		std::cout << "(4) Delete User" << std::endl;
+		std::cout << "(5) Exit" << std::endl;
 
-	case 3:
-		break;
+		std::cin >> answer;
+		switch (answer)
+		{
+		case 1:
+			createUserMenu(allUsers);
+			break;
 
-	default:
-		std::cout << "Bad choice! Please try again later.\n";
+		case 2:
+			openUserMenu(allUsers);
+			break;
+
+		case 3:
+			viewAllUsersMenu(allUsers);
+			break;
+		case 4:
+			deleteUserMenu(allUsers);
+			break;
+		case 5:
+			std::cout << "Goodbye" << std::endl;
+			check = false;
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+
+		
 	}
 
 }
 
+
+
+
+void createUserMenu(DynamicArray<User> *allUsers)
+{
+	bool check = true;
+	while (check)
+	{
+
+		int answer;
+
+		std::cout << "(1) Create User" << std::endl;
+		std::cout << "(2) Go Back" << std::endl;
+
+
+
+		std::cin >> answer;
+		switch (answer)
+		{
+		case 1:
+			createUser(allUsers);
+			break;
+
+		case 2:
+			void menu();
+			check = false;
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+	}
+}
+
+void openUserMenu(DynamicArray<User> *allUsers)
+{
+	bool check = true;
+	std::string name, password;
+	std::cout << "Enter Username:\t" << std::endl;
+	cin >> name;
+	std::cout << "Enter Password:\t" << std::endl;
+	cin >> password;
+
+	//check = login(allUsers, name, password);
+
+	while (check)
+	{
+		User currentUser;
+		int answer;
+
+		std::cout << "(1) Inbox" << std::endl;
+		std::cout << "(2) Outbox" << std::endl;
+		std::cout << "(3) Sent" << std::endl;
+		std::cout << "(4) Deleted" << std::endl;
+		std::cout << "(5) Back" << std::endl;
+
+
+
+		std::cin >> answer;
+		switch (answer)
+		{
+		case 1:
+			check = false;
+			break;
+
+		case 2:
+			check = false;
+			break;
+
+		case 3:
+			check = false;
+			break;
+
+		case 4:
+			check = false;
+			break;
+
+		case 5:
+			check = false;
+			void menu();
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+	}
+}
+
+void viewAllUsersMenu(DynamicArray<User> *allUsers)
+{
+	bool check = true;
+	while (check)
+	{
+
+		int answer;
+
+		std::cout << "(1) View All" << std::endl;
+		std::cout << "(2) Back" << std::endl;
+
+
+
+		std::cin >> answer;
+		switch (answer)
+		{
+		case 1:
+			check = false;
+			break;
+
+		case 2:
+			check = false;
+			void menu();
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+	}
+}
+
+void deleteUserMenu(DynamicArray<User> *allUsers)
+{
+	bool check = true;
+	while (check)
+	{
+
+		int answer;
+
+		std::cout << "(1) Search By Name" << std::endl;
+		std::cout << "(2) Search By Email" << std::endl;
+		std::cout << "(3) Back" << std::endl;
+
+
+
+		std::cin >> answer;
+		switch (answer)
+		{
+		case 1:
+			break;
+
+		case 2:
+			break;
+
+		case 3:
+			void menu();
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+	}
+}
+
+bool login(std::vector<User> allUsers, std::string name, std::string password)
+{
+	for (int i = 0; i < allUsers.size(); i++)
+	{
+		if (allUsers[i].getName() == name)
+		{
+			if (allUsers[i].getPassword() == password)
+				return true;
+		}
+	}
+	return false;
+}
+
+
+void createUser(DynamicArray<User> *allUsers)
+{
+	std::string name, email, password;
+
+	std::cout << "NEW USER" << std::endl;
+	std::cout << "Enter name:\t" << std::endl;
+	cin >> name;
+	std::cout << "Enter email:\t" << std::endl;
+	cin >> email;
+	std::cout << "Enter password:\t" << std::endl;
+	cin >> password;
+
+	allUsers->AddLast(User(name, email, password));
+	std::cout << "USER CREATED" << std::endl;
+}

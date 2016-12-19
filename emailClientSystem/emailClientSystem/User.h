@@ -8,7 +8,9 @@
 #include "BoxType.h"
 class User
 {
-	
+
+	int count = 0;
+
 
 	friend std::ostream& operator<<(std::ostream& outStream, const User& user);
 	friend std::istream& operator >> (std::istream& inStream, User& user);
@@ -27,10 +29,12 @@ public:
 	User(std::string name, std::string password, std::string emailAddress);
 	~User();
 
+	void setID(int id) { User::id = id; }
 	void setName(std::string name);
 	void setPassword(std::string password);
 	void setEmailAddress(std::string emailAddress);
 
+	int getID() { return User::id; }
 	std::string getName() { return User::name; }
 	std::string getPassword() { return User::name; }
 	std::string getEmailAddress() { return User::name; }
@@ -82,7 +86,7 @@ public:
 private:
 	std::string name, password, emailAddress;
 	std::stack<Email, std::vector<Email>> inbox, outbox, sentbox, deletedbox;
-	int inboxSize;
+	int id, inboxSize;
 	std::map<std::string, std::string> contactList;
 };
 

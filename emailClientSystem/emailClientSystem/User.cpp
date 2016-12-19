@@ -12,6 +12,7 @@ User::User():User("defaultName","defaoultPassword","defaultEmailAddress")
 
 User::User(std::string name, std::string password, std::string emailAddress)
 {
+	setID(count++);
 	setName(name);
 	setPassword(password);
 	setEmailAddress(emailAddress);
