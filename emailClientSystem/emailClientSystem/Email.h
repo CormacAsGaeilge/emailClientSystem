@@ -6,18 +6,16 @@
 #include "Attachment.h"
 class Email
 {
-
-
 	int count = 0;
-
+	friend std::ostream& operator<<(std::ostream& outStream, const Email& user);
+	friend std::istream& operator >> (std::istream& inStream, Email& user);
 
 public:
 	Email();
 	Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body); //multi recipient 0 attachment
 	Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body, std::vector<Attachment> attachments); //multi recipient multi attachment
-	Email(std::string sender, std::string subject, std::string body); //multi recipient 0 attachment
-	Email(std::string sender, std::string subject, std::string body, std::vector<Attachment> attachments); //multi recipient multi attachment
-
+	Email(std::string sender, std::string subject, std::string body);
+	Email(std::string sender, std::string subject, std::string body, std::vector<Attachment> attachments);
 	~Email();
 
 	//Add Validation
@@ -28,8 +26,6 @@ public:
 	void setBody(std::string body) { Email::body = body; } //Length >= 1 character
 	void setAttachment(std::vector<Attachment> attachments) { Email::attachments = attachments; }
 
-
-	//Attachment(s) Properly instanciate Attachment object(s) Text file, Logo.png
 	void print();
 
 	unsigned int getId() { return Email::id; }
@@ -40,9 +36,10 @@ public:
 	std::time_t getDate();
 	std::vector<Attachment> getAttachments() { return Email::attachments; }
 
-	//print - char* dt = ctime(&now); cout << "The local date and time is: " << dt << endl;
-
-	//Add other variables/setters/getters
+	//(==, !=, =, <<, and >>)
+	bool operator>(const Email& other);
+	bool operator==(const Email& other);
+	bool operator!=(const Email& other);
 private:
 	unsigned int id;
 	std::string sender, subject, body;

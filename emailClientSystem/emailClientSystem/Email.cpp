@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <ctime>
 #include <chrono>
-#pragma warning(disable : 4996)
+#pragma warning(disable : 4996) //time needs to be changed from localtime to s_localtime
 using namespace std;
 
 Email::Email()
@@ -74,8 +74,6 @@ void Email::print()
 {
 	int recCount = Email::recipients.size(), attachCount = Email::attachments.size();
 
-
-
 	cout << "ID: " << id << endl;
 	cout << "Date: " << put_time(localtime(&date), "%F %T") << endl;
 	cout << "Recipient(s): ";
@@ -93,5 +91,42 @@ void Email::print()
 			cout << attachCount << ";" << endl;
 		cout << "_______________________________" << endl;
 	}
+}
 
+
+std::ostream& operator<<(ostream & outStream, const Email & email)
+{
+	outStream << "Name:\t";
+	return outStream;
+}
+
+std::istream& operator >> (std::istream & inStream, Email & email)
+{
+	string str;
+	inStream >> str;
+	return inStream;
+}
+
+bool Email::operator>(const Email &other)
+{
+	if (Email::getBody() > other.body)
+		return true;
+	else
+		return false;
+}
+
+bool Email::operator==(const Email & other)
+{
+	if (Email::getBody() == other.body)
+		return true;
+	else
+		return false;
+}
+
+bool Email::operator!=(const Email & other)
+{
+	if (Email::getBody() != other.body)
+		return true;
+	else
+		return false;
 }

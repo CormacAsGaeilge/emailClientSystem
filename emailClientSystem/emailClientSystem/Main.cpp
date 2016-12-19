@@ -123,14 +123,13 @@ void openUserMenu(User *user)
 		User currentUser;
 		int answer;
 
-		std::cout << "(1) New" << std::endl;
-		std::cout << "(2) View" << std::endl;
+		std::cout << "(1) New"	<< std::endl;
+		std::cout << "(2) View"	<< std::endl;
 		std::cout << "(3) Delete" << std::endl;
 		std::cout << "(4) Delete All" << std::endl;
 		std::cout << "(5) Search By" << std::endl;
 		std::cout << "(6) RESET" << std::endl;
-		std::cout << "(7) Back" << std::endl;
-
+		std::cout << "(7) Back"	<< std::endl;
 
 		std::cin >> answer;
 		switch (answer)
@@ -195,7 +194,7 @@ void newEmail(User *user)
 			cin >> attachCount;
 
 			std::vector<Attachment> attachments;
-			for (int i = 0; i < recCount; i++)
+			for (int i = 0; i < attachCount; i++)
 			{
 				std::string fileName, fileSuffix;
 				std::cout << "Enter File Name:\t";
