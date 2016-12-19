@@ -1,7 +1,10 @@
 #include "User.h"
 #include "Email.h"
 #include "DynamicArray.h"
+#include <iostream>
 #include <string>
+#include <regex>
+
 
 User::User():User("defaultName","defaoultPassword","defaultEmailAddress")
 {
@@ -18,6 +21,55 @@ User::User(std::string name, std::string password, std::string emailAddress)
 User::~User()
 {
 }
+
+//SETTERS WILL BE RE_WRITTEN INTO SIMPLE FORM
+void User::setName(std::string name)
+{
+	if (name.length() >= 8)
+		User::name = name;  //Length >= 8 
+	else
+		User::name = "default_name";
+}
+
+//NOT TESTED 
+//LONG AND NEEDS CLEANING UP 
+//ILL GET BACK TO THIS 
+void User::setPassword(std::string password)
+{
+	//Length >= 8 characters;
+	//Must contain minimum of 1 number and 1 letter(non - case senstive).
+	char *y = new char[password.length() + 1];
+	std::string validation;
+	int valid1 = 0;
+	int valid2 = 0;
+	int valid3 = 0;
+	if (password.length() >= 8)
+	{
+		for (int i = 0; i <= password.length(); i++)
+		{
+			if (*y >= 65 && *y <= 90)
+				valid1++;
+			if (*y >= 97 && *y <= 122)
+				valid2++;
+			if (*y >= 48 && *y <= 57)
+				valid3++;
+		}
+	}
+
+	if (valid1 > 0 && valid2 > 0 && valid3 > 0)
+		User::password = password;
+	else
+		User::password = "default_password";
+}
+
+
+void User::setEmailAddress(std::string emailAddress)
+{
+	//Valid email (regex)
+	std::string regex = "\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b";
+	User::emailAddress = emailAddress;
+}
+	 
 
 void User::createNewEmail(Email email)
 {
