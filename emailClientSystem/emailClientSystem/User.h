@@ -6,9 +6,22 @@
 #include <iostream>
 #include "Email.h"
 #include "BoxType.h"
-
 class User
 {
+	
+
+	friend std::ostream& operator<<(std::ostream& outStream, const User& user);
+	friend std::istream& operator >> (std::istream& inStream, User& user);
+
+
+
+
+
+
+
+
+
+
 public:
 	User();
 	User(std::string name, std::string password, std::string emailAddress);
@@ -18,7 +31,6 @@ public:
 	void setPassword(std::string password);
 	void setEmailAddress(std::string emailAddress);
 
-
 	std::string getName() { return User::name; }
 	std::string getPassword() { return User::name; }
 	std::string getEmailAddress() { return User::name; }
@@ -26,12 +38,8 @@ public:
 	void createNewEmail(Email email);
 	void retriveNewEmail(Email email);
 	void printBox(BoxType boxType);
-	/*NO LONGER NEEDED*/
-	/*void printInbox();
-	void printOutbox();
-	void printSentbox();*/
-	Email searchEmailUsingSubject(std::string userInput);						//needs boxType
-	std::vector<Email> searchEmailUsingSubjectReturnAll(std::string userInput);	//needs boxType
+	Email searchEmailUsingSubject(std::string userInput, BoxType boxType);						//needs boxType
+	std::vector<Email> searchEmailUsingSubjectReturnAll(std::string userInput, BoxType boxType);	//needs boxType
 	Email searchEmailByID(unsigned int userInput, BoxType boxType);			
 	
 	bool deleteEmail(unsigned int emailId, BoxType boxType); 
@@ -58,6 +66,18 @@ public:
 
 
 	//C++11 features ifOnce, ifNone, ifAll
+
+
+
+	//(==, !=, =, <<, and >>)
+	bool operator>(const User& other);
+	bool operator==(const User& other);
+	bool operator!=(const User& other);
+
+
+
+
+
 
 private:
 	std::string name, password, emailAddress;

@@ -3,8 +3,8 @@
 #include "DynamicArray.h"
 #include <iostream>
 #include <string>
+#include <exception>
 #include <regex>
-
 
 User::User():User("defaultName","defaoultPassword","defaultEmailAddress")
 {
@@ -26,9 +26,10 @@ User::~User()
 void User::setName(std::string name)
 {
 	if (name.length() >= 8)
-		User::name = name;  //Length >= 8 
-	else
 		User::name = "default_name";
+	else
+		User::name = name;  //Length >= 8 
+		
 }
 
 //NOT TESTED 
@@ -86,6 +87,7 @@ void User::printBox(BoxType boxType)
 	std::stack<Email, std::vector<Email>>* box = User::getBoxType(boxType), tempBox;
 
 	size_t size = box->size();
+	std::cout << "_____________________" << boxType << "_____________________" << std::endl;
 	while (size > 0)
 	{
 		box->top().print();
@@ -106,128 +108,67 @@ void User::printBox(BoxType boxType)
 	}
 
 }
-/* No Longer Needed*/
-/*
-void User::printInbox()
-{
-	std::stack<Email, std::vector<Email>> tempInbox;
-	size_t size = User::inbox.size();
-	while (size > 0)
-	{
-		User::inbox.top().print();
-		std::cout << "_________________________________________" << std::endl;
-		tempInbox.push(User::inbox.top());
-		User::inbox.pop();
-		size = User::inbox.size();
-	}
-
-	std::cout << "__________________end___________________" << std::endl;
-
-	size = tempInbox.size();
-	while (size > 0)
-	{
-		User::inbox.push(tempInbox.top());
-		tempInbox.pop();
-		size = tempInbox.size();
-	}
-
-}
-
-void User::printOutbox()
-{
-	std::stack<Email, std::vector<Email>> tempOutbox;
-	size_t size = User::outbox.size();
-	while (size > 0)
-	{
-		User::outbox.top().print();
-		std::cout << "_________________________________________" << std::endl;
-		tempOutbox.push(User::outbox.top());
-		User::outbox.pop();
-		size = User::outbox.size();
-	}
-
-	std::cout << "__________________end___________________" << std::endl;
-
-	size = tempOutbox.size();
-	while (size > 0)
-	{
-		User::outbox.push(tempOutbox.top());
-		tempOutbox.pop();
-		size = tempOutbox.size();
-	}
-}
-void User::printSentbox()
-{
-	std::stack<Email, std::vector<Email>> tempSentbox;
-	size_t size = User::sentbox.size();
-	while (size > 0)
-	{
-		User::sentbox.top().print();
-		std::cout << "_________________________________________" << std::endl;
-		tempSentbox.push(User::sentbox.top());
-		User::sentbox.pop();
-		size = User::sentbox.size();
-	}
-
-	std::cout << "__________________end___________________" << std::endl;
-
-	size = tempSentbox.size();
-	while (size > 0)
-	{
-		User::sentbox.push(tempSentbox.top());
-		tempSentbox.pop();
-		size = tempSentbox.size();
-	}
-}
-*/
 
 //Search EMAIL By Subject
-Email User::searchEmailUsingSubject(std::string userInput)
+Email User::searchEmailUsingSubject(std::string userInput, BoxType boxType)
 {
 	Email email;
-	std::stack<Email, std::vector<Email>> tempInbox;
-	size_t size = User::inbox.size();
+	std::stack<Email, std::vector<Email>>* box = User::getBoxType(boxType), tempBox;
+
+	size_t size = box->size();
 	while (size > 0)
 	{
-		if (User::inbox.top().getSubject() == userInput)
-			email = inbox.top();
-		tempInbox.push(User::inbox.top());
-		User::inbox.pop();
-		size = User::inbox.size();
+		if (box->top().getSubject() == userInput)
+			email = box->top();
+		tempBox.push(box->top());
+		box->pop();
+		size = box->size();
 	}
 
+	//add emails back to stack
+	size = tempBox.size();
+	while (size > 0)
+	{
+		box->push(tempBox.top());	//add back to the box
+		tempBox.pop();				//remove from temp box
+		size = tempBox.size();		//get size for while check
+	}
 	//loop through subjects 
 	//match subject
 
 	return email;
 }
 
-std::vector<Email> User::searchEmailUsingSubjectReturnAll(std::string userInput)
+std::vector<Email> User::searchEmailUsingSubjectReturnAll(std::string userInput, BoxType boxType)
 {
 	
 	std::vector<Email> allEmails;
-
-	std::stack<Email, std::vector<Email>> tempInbox;
-
+	std::stack<Email, std::vector<Email>>* box = User::getBoxType(boxType), tempBox;
 
 	size_t size = User::inbox.size();
 	while (size > 0)
 	{
-		if (User::inbox.top().getSubject() == userInput)
-			allEmails.push_back(User::inbox.top());
-		tempInbox.push(User::inbox.top());
-		User::inbox.pop();
-		size = User::inbox.size();
+		if (box->top().getSubject() == userInput)
+			allEmails.push_back(box->top());
+		tempBox.push(box->top());
+		box->pop();
+		size = box->size();
 	}
 
+	//add emails back to stack
+	size = tempBox.size();
+	while (size > 0)
+	{
+		box->push(tempBox.top());	//add back to the box
+		tempBox.pop();				//remove from temp box
+		size = tempBox.size();		//get size for while check
+	}
 
 	//loop through subjects 
 	//match subject
 
 	return allEmails;
 }
-//PADDY!!!!!!! - Make sure to reset the stack anytime you iterate through it. Otherwise it'll be deleted
-//Look below how to use a temporary stack to reset the original stacks
 Email User::searchEmailByID(unsigned int userInput, BoxType boxType)
 {
 	Email email;
@@ -329,11 +270,13 @@ std::map<std::string, std::string> User::searchContact(std::vector<User> allUser
 	for (User u : allUsers)
 		if (name == u.getName())
 		{
-			newMap.insert(u.getName(), u.getEmailAddress());
+			newMap.insert(std::pair<std::string, std::string>(u.getName(), u.getEmailAddress()));
 		}
 
 	return newMap;
 }
+
+
 
 //used for choosing which box to make changes to
 std::stack<Email, std::vector<Email>>* User::getBoxType(BoxType boxType)
@@ -346,4 +289,42 @@ std::stack<Email, std::vector<Email>>* User::getBoxType(BoxType boxType)
 		return &sentbox;
 	else
 		return &deletedbox;
+}
+
+
+std::ostream& operator<<(ostream & outStream, const User & user)
+{
+	outStream << "Name:\t" << user.name << "\nEmail:\t" << user.emailAddress << "\n";
+	return outStream;
+}
+
+std::istream& operator >> (std::istream & inStream, User & user)
+{
+	string str;
+	inStream >> str;
+	return inStream;
+}
+
+bool User::operator>(const User &other)
+{
+	if (User::name > other.name)
+		return true;
+	else
+		return false;
+}
+
+bool User::operator==(const User & other)
+{
+	if (User::name == other.name)
+		return true;
+	else
+		return false;
+}
+
+bool User::operator!=(const User & other)
+{
+	if (User::name != other.name)
+		return true;
+	else
+		return false;
 }

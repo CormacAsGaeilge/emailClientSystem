@@ -1,6 +1,7 @@
 #pragma once
-#include <stdexcept>
-#include <iostream>
+
+#include <exception>
+using namespace std;
 template <typename T>
 class DynamicArray
 {
@@ -15,11 +16,13 @@ public:
 	void AddLast(const T data);
 	void Print() {
 		for (int i = 0; i < length - 1; i++)
-			std::cout << pArray[i] << ",";
-		std::cout << pArray[length - 1] << std::endl;
+			cout << pArray[i] << "\n";
+		cout << pArray[length - 1] << endl;
 	};
-	int Count();
+	int Count() { return count; }
 
+
+	bool operator>(const DynamicArray& other);
 private:
 
 	void Grow();
@@ -28,6 +31,12 @@ private:
 	int length;
 	int count;
 };
+
+/*
+In this example we simply move the code from the CPP to the template class.
+Unlike with TemplatePair where we used an INL include.
+See the comment block at the top of Main for more on this.
+*/
 
 template <typename T>
 DynamicArray<T>::DynamicArray(int length)
@@ -43,19 +52,42 @@ void DynamicArray<T>::Initialize()
 		pArray[i] = T();
 }
 
+template<typename T>
+inline bool DynamicArray<T>::operator>(const DynamicArray & other)
+{
+	if (DynamicArray::count > other.count)
+		return true;
+	else 
+		return false;
+}
+
 template <typename T>
 void DynamicArray<T>::Grow()
 {
 	int newLength = static_cast<int>(round(length * 1.5));
+
+	//make new array 150% original size
 	T* tempPArray = new T[newLength];
+
+	//copy contents
 	for (int i = 0; i < length; i++)
 	{
 		tempPArray[i] = pArray[i];
 	}
+
+	//free RAM from old array
 	delete[] DynamicArray::pArray;
+
+	//make old pointer, now point to the new array
 	DynamicArray::pArray = tempPArray;
+
+	//reset tempPArray address since its no longer in use
 	tempPArray = nullptr;
+
+	//remember to set the new length
 	length = newLength;
+
+	//blank any new spaces after the data
 	for (int i = count; i < length; i++)
 		pArray[i] = T();
 }
@@ -70,10 +102,9 @@ DynamicArray<T>::~DynamicArray()
 template <class T>
 T& DynamicArray<T>::operator[](const int index)
 {
-	//NEEDS TO BE FIXED
-	/*if (index < 0 || index > length - 1)
+	if (index < 0 || index > length - 1)
 		throw out_of_range("Array index of of bounds exception!");
-*/
+
 	return pArray[index];
 }
 
@@ -104,10 +135,3 @@ void DynamicArray<T>::AddLast(const T data)
 {
 	Add(data, length - 1);
 }
-
-template<typename T>
-int DynamicArray<T>::Count()
-{
-	return count;
-}
-

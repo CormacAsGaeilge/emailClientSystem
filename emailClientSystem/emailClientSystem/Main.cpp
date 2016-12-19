@@ -4,29 +4,94 @@
 #include "DynamicArray.h"
 #include <vector>
 #include <iostream>
-
+#include <algorithm>
+#include <string>
+#include <chrono>
+#include <cstdlib>
 void populateUsers(DynamicArray<User> &allUsers);
 void populateEmails(DynamicArray<User> &allUsers);
 void demoReadAllInbox(DynamicArray<User> &allUsers);
 void menu();
+
+template <typename T>
+void selectionSort(DynamicArray<T> *pArray, int length);
+template <typename T>
+void selectionSort(std::vector<T> *pArray, int length);
+
+
+template <typename T>
+void swap(T* pArray, int i, int j);
 
 int main()
 {
 	DynamicArray<User> allUsers(5);
 	populateUsers(allUsers);
 
-	populateEmails(allUsers);
+	//populateEmails(allUsers);
 
-	demoReadAllInbox(allUsers);
+	//demoReadAllInbox(allUsers);
 
-	User testUser("Dan", "123456", "dan@gmail.com");
-	testUser.addContact(allUsers[1]);
+	//User testUser("Dan", "123456", "dan@gmail.com");
+	//testUser.addContact(allUsers[1]);
 
+	constexpr int N = 4;
 
+	allUsers.Print();
+	//selectionSort(&allUsers, N);
+	//allUsers.Print();
 	//menu();
 
 	system("pause");
 	return 0;
+}
+
+template <typename T>
+void swap(T* pArray, int i, int j)
+{
+	T temp = pArray[i];	
+	pArray[i] = pArray[j]; 	
+	pArray[j] = temp;
+}
+
+template <typename T>
+void selectionSort(DynamicArray<T> *pArray, int length)
+{
+	if (pArray == nullptr || length <= 0)
+		return;
+
+	for (int i = 0; i < length - 1; i++)
+	{
+		int minPos = i;
+		for (int j = i + 1; j < length; j++)
+		{
+			if (pArray[minPos] > pArray[j])
+			{
+				minPos = j;
+			}
+		}
+		if (minPos != i) //found a smaller value!
+			swap(pArray, minPos, i);
+	}
+}
+template <typename T>
+void selectionSort(std::vector<T> *pArray, int length)
+{
+	if (pArray == nullptr || length <= 0)
+		return;
+
+	for (int i = 0; i < length - 1; i++)
+	{
+		int minPos = i;
+		for (int j = i + 1; j < length; j++)
+		{
+			if (pArray[minPos] > pArray[j])
+			{
+				minPos = j;
+			}
+		}
+		if (minPos != i) //found a smaller value!
+			swap(pArray, minPos, i);
+	}
 }
 
 void demoReadAllInbox(DynamicArray<User> &allUsers)
@@ -59,25 +124,26 @@ void populateEmails(DynamicArray<User> &allUsers)
 void populateUsers(DynamicArray<User> &allUsers)
 {
 
+	allUsers.Initialize();
 	std::string name = "Bob", password = "pa55w0rd", emailAddress = "bob@gmail.com";
 	User u1(name, password, emailAddress);
-    allUsers.Add(u1,0);
+	allUsers.Add(u1, 0);
 
 	name = "Paddy", password = "password1", emailAddress = "paddy@gmail.com";
 	User u2(name, password, emailAddress);
-	allUsers.Add(u2,1);
+	allUsers.Add(u2, 1);
 
 	name = "Cormac", password = "wordpass", emailAddress = "cormac@gmail.com";
 	User u3(name, password, emailAddress);
-	allUsers.Add(u3,2);
+	allUsers.Add(u3, 2);
 
 	name = "Fred", password = "fredpass", emailAddress = "fred@gmail.com";
 	User u4(name, password, emailAddress);
-	allUsers.Add(u4,3);
+	allUsers.Add(u4, 3);
 
 	name = "Rani", password = "paddy1", emailAddress = "rani@gmail.com";
 	User u5(name, password, emailAddress);
-	allUsers.Add(u5,4);
+	allUsers.Add(u5, 4);
 }
 
 void menu()
