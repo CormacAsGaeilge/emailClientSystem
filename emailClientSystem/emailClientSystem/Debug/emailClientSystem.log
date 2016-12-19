@@ -1,3 +1,8 @@
-﻿  Main.cpp
-  emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.exe
-  emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.pdb (Partial PDB)
+﻿  User.cpp
+c:\users\iison\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(50): warning C4018: '<=': signed/unsigned mismatch
+c:\users\iison\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(71): warning C4129: '.': unrecognized character escape sequence
+  Main.cpp
+  Email.cpp
+  Attachment.cpp
+  Generating Code...
+c:\users\iison\emailclientsystem\emailclientsystem\emailclientsystem\main.cpp(198): error C4700: uninitialized local variable 'recCount' used

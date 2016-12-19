@@ -9,6 +9,8 @@
 #include <chrono>
 #include <cstdlib>
 void populateEmails(User &user);
+void deletEmail(User *user);
+void deleteAllEmails(User *user);
 
 void menu(User *user);
 void openUserMenu(User *user);
@@ -16,8 +18,6 @@ void newEmail(User *user);
 template <typename T>
 void swap(T* pArray, int i, int j);
 void selectionSort(User* pArray, int length);
-
-
 
 int main()
 {
@@ -96,10 +96,7 @@ void menu(User *user)
 		default:
 			std::cout << "Bad choice! Please try again.\n";
 		}
-
-		
 	}
-
 }
 
 
@@ -116,13 +113,10 @@ void openUserMenu(User *user)
 		"\nEMAIL ADDRESS:\t" << user->getEmailAddress() <<
 		"\nPASSWORD:\t" << hiddenPassword << std::endl;
 
-
-
 	while (check)
 	{
 		User currentUser;
 		int answer;
-
 		std::cout << "(1) New" << std::endl;
 		std::cout << "(2) View" << std::endl;
 		std::cout << "(3) Delete" << std::endl;
@@ -130,7 +124,6 @@ void openUserMenu(User *user)
 		std::cout << "(5) Search By" << std::endl;
 		std::cout << "(6) RESET" << std::endl;
 		std::cout << "(7) Back" << std::endl;
-
 
 		std::cin >> answer;
 		switch (answer)
@@ -144,11 +137,11 @@ void openUserMenu(User *user)
 			break;
 
 		case 3:
-			check = false;
+			deletEmail(user);
 			break;
 
 		case 4:
-			check = false;
+			deleteAllEmails(user);
 			break;
 
 		case 5:
@@ -168,6 +161,96 @@ void openUserMenu(User *user)
 		}
 	}
 }
+
+void deletEmail(User* user)
+{
+	bool check = true;
+	int userInput;	
+
+	while (check)
+	{
+		User currentUser;
+		int answer;
+		std::cout << "(1) Delete From Inbox" << std::endl;
+		std::cout << "(2) Delete From Outbox" << std::endl;
+		std::cout << "(3) Delete From Sentbox" << std::endl;
+		std::cout << "(4) Delete From Deleted Emails" << std::endl;
+		std::cin >> answer;
+
+		switch (answer)
+		{
+		case 1:
+			std::cout << "Please enter a valid ID: " << std::endl;
+			std::cin >> userInput;
+			user->deleteEmail(userInput, InboxType);
+			break;
+
+		case 2:
+			std::cout << "Please enter a valid ID: " << std::endl;
+			std::cin >> userInput;
+			user->deleteEmail(userInput, OutboxType);
+			break;
+
+		case 3:
+			std::cout << "Please enter a valid ID: " << std::endl;
+			std::cin >> userInput;
+			user->deleteEmail(userInput, SentboxType);
+			break;
+
+		case 4:
+			std::cout << "Please enter a valid ID: " << std::endl;
+			std::cin >> userInput;
+			user->deleteEmail(userInput, DeletedboxType);
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+	}
+}
+
+void deleteAllEmails(User *user)
+{
+	bool check = true;
+	int userInput;
+	while (check)
+	{
+		User currentUser;
+		int answer;
+		std::cout << "(1) Delete All From Inbox" << std::endl;
+		std::cout << "(2) Delete All From Outbox" << std::endl;
+		std::cout << "(3) Delete All From Sentbox" << std::endl;
+		std::cout << "(4) Delete All From Deleted Emails" << std::endl;
+		std::cin >> answer;
+
+		switch (answer)
+		{
+		case 1:
+			std::cin >> userInput;
+			user->deletedAllEmails(InboxType);
+			break;
+
+		case 2:
+			std::cin >> userInput;
+			user->deletedAllEmails(OutboxType);
+			break;
+
+		case 3:
+			std::cin >> userInput;
+			user->deletedAllEmails(SentboxType);
+			break;
+
+		case 4:
+			std::cin >> userInput;
+			user->deletedAllEmails(DeletedboxType);
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+	}
+}
+
 
 void newEmail(User *user)
 {
