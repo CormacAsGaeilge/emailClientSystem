@@ -6,7 +6,7 @@
 #include <regex>
 
 
-int Email::count = 0;
+int User::count = 0;
 
 User::User():User("defaultName","defaoultPassword","defaultEmailAddress")
 {
