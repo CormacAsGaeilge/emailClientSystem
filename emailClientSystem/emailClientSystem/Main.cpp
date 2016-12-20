@@ -11,6 +11,8 @@
 void populateEmails(User &user);
 void deletEmail(User *user);
 void deleteAllEmails(User *user);
+void viewEmail(User *user);
+
 void searchBy(User *user);
 void menu(User *user);
 void openUserMenu(User *user);
@@ -133,7 +135,7 @@ void openUserMenu(User *user)
 			break;
 
 		case 2:
-			check = false;
+			viewEmail(user);
 			break;
 
 		case 3:
@@ -153,12 +155,57 @@ void openUserMenu(User *user)
 			break;
 
 		case 7:
-			check = false;
+			menu(user);
 			break;
 
 		default:
 			std::cout << "Bad choice! Please try again.\n";
 		}
+	}
+}
+
+void viewEmail(User *user)
+{
+	bool check = true;
+
+	while (check)
+	{
+		User currentUser;
+		int answer;
+		std::cout << "(1) View Inbox" << std::endl;
+		std::cout << "(2) View Outbox" << std::endl;
+		std::cout << "(3) View Sentbox" << std::endl;
+		std::cout << "(4) View Deleted Emails" << std::endl;
+		std::cout << "(5) Back" << std::endl;
+		std::cin >> answer;
+
+		switch (answer)
+		{
+		case 1:
+			user->printBox(InboxType);
+			break;
+
+		case 2:
+			user->printBox(OutboxType);
+			break;
+
+		case 3:
+			user->printBox(SentboxType);
+			break;
+
+		case 4:
+			user->printBox(DeletedboxType);
+			break;
+
+		case 5:
+			openUserMenu(user);
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+
+
 	}
 }
 
@@ -175,6 +222,7 @@ void deletEmail(User* user)
 		std::cout << "(2) Delete From Outbox" << std::endl;
 		std::cout << "(3) Delete From Sentbox" << std::endl;
 		std::cout << "(4) Delete From Deleted Emails" << std::endl;
+		std::cout << "(5) Back" << std::endl;
 		std::cin >> answer;
 
 		switch (answer)
@@ -203,6 +251,10 @@ void deletEmail(User* user)
 			user->deleteEmail(userInput, DeletedboxType);
 			break;
 
+		case 5:
+			openUserMenu(user);
+			break;
+
 		default:
 			std::cout << "Bad choice! Please try again.\n";
 		}
@@ -221,6 +273,7 @@ void deleteAllEmails(User *user)
 		std::cout << "(2) Delete All From Outbox" << std::endl;
 		std::cout << "(3) Delete All From Sentbox" << std::endl;
 		std::cout << "(4) Delete All From Deleted Emails" << std::endl;
+		std::cout << "(5) Back" << std::endl;
 		std::cin >> answer;
 
 		switch (answer)
@@ -243,6 +296,10 @@ void deleteAllEmails(User *user)
 		case 4:
 			std::cin >> userInput;
 			user->deletedAllEmails(DeletedboxType);
+			break;
+
+		case 5:
+			openUserMenu(user);
 			break;
 
 		default:
