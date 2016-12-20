@@ -1,4 +1,11 @@
-﻿  Main.cpp
-i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\main.cpp(382): warning C4018: '<': signed/unsigned mismatch
+﻿  User.cpp
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(45): warning C4018: '<': signed/unsigned mismatch
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(56): warning C4018: '<=': signed/unsigned mismatch
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\user.cpp(75): warning C4129: '.': unrecognized character escape sequence
+  Main.cpp
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\main.cpp(438): warning C4018: '<': signed/unsigned mismatch
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\main.cpp(567): warning C4101: 'eArray': unreferenced local variable
+  Email.cpp
+  Generating Code...
   emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.exe
   emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.pdb (Partial PDB)

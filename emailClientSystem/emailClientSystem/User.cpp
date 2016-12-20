@@ -38,9 +38,15 @@ void User::setName(std::string name)
 //ILL GET BACK TO THIS 
 void User::setPassword(std::string password)
 {
+
 	//Length >= 8 characters;
 	//Must contain minimum of 1 number and 1 letter(non - case senstive).
 	char *y = new char[password.length() + 1];
+	for (int i = 0; i < password.length(); i++)
+	{
+		y[i] = password[i];
+	}
+	
 	std::string validation;
 	int valid1 = 0;
 	int valid2 = 0;
@@ -49,21 +55,19 @@ void User::setPassword(std::string password)
 	{
 		for (int i = 0; i <= password.length(); i++)
 		{
-			if (*y >= 65 && *y <= 90)
+			if (y[i] >= 65 && y[i] <= 90)
 				valid1++;
-			if (*y >= 97 && *y <= 122)
+			if (y[i] >= 97 && y[i] <= 122)
 				valid2++;
-			if (*y >= 48 && *y <= 57)
+			if (y[i] >= 48 && y[i] <= 57)
 				valid3++;
 		}
 	}
-
 	if (valid1 > 0 && valid2 > 0 && valid3 > 0)
 		User::password = password;
 	else
 		User::password = "default_password";
 }
-
 
 void User::setEmailAddress(std::string emailAddress)
 {
@@ -320,8 +324,6 @@ std::map<std::string, std::string> User::searchContact(std::vector<User> allUser
 	return newMap;
 }
 
-
-
 //used for choosing which box to make changes to
 std::stack<Email*, std::vector<Email*>>* User::getBoxType(BoxType boxType)
 {
@@ -335,8 +337,7 @@ std::stack<Email*, std::vector<Email*>>* User::getBoxType(BoxType boxType)
 		return &deletedbox;
 }
 
-
-std::ostream& operator<<(ostream & outStream, const User & user)
+std::ostream& operator<<(std::ostream & outStream, const User & user)
 {
 	outStream << "Name:\t" << user.name << "\nEmail:\t" << user.emailAddress << "\n";
 	return outStream;
@@ -344,7 +345,7 @@ std::ostream& operator<<(ostream & outStream, const User & user)
 
 std::istream& operator >> (std::istream & inStream, User & user)
 {
-	string str;
+	std::string str;
 	inStream >> str;
 	return inStream;
 }

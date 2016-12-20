@@ -1,7 +1,6 @@
 #pragma once
 
 #include <exception>
-using namespace std;
 template <typename T>
 class DynamicArray
 {

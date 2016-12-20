@@ -4,7 +4,8 @@
 #include <ctime>
 #include <chrono>
 #pragma warning(disable : 4996) //time needs to be changed from localtime to s_localtime
-using namespace std;
+
+int Email::count = 0;
 
 Email::Email()
 {
@@ -74,27 +75,27 @@ void Email::print()
 {
 	int recCount = Email::recipients.size(), attachCount = Email::attachments.size();
 
-	cout << "ID: " << id << endl;
-	cout << "Date: " << put_time(localtime(&date), "%F %T") << endl;
-	cout << "Recipient(s): ";
+	std::cout << "ID: " << id << std::endl;
+	std::cout << "Date: " << std::put_time(std::localtime(&date), "%F %T") << std::endl;
+	std::cout << "Recipient(s): ";
 	for(int i = 0; i < recCount; i++)
-		cout << recipients[i] << ";" << endl;
+		std::cout << recipients[i] << ";" << std::endl;
 
-	cout << "Subject: " << subject << endl;
-	cout << "_______________________________" << endl;
-	cout << "Body: " << body << endl;
-	cout << "_______________________________" << endl;
+	std::cout << "Subject: " << subject << std::endl;
+	std::cout << "_______________________________" << std::endl;
+	std::cout << "Body: " << body << std::endl;
+	std::cout << "_______________________________" << std::endl;
 	if (attachCount != 0)
 	{
-		cout << "Attachments(s): ";
+		std::cout << "Attachments(s): ";
 		for (int i = 0; i < attachCount; i++)
-			cout << attachCount << ";" << endl;
-		cout << "_______________________________" << endl;
+			std::cout << attachCount << ";" << std::endl;
+		std::cout << "_______________________________" << std::endl;
 	}
 }
 
 
-std::ostream& operator<<(ostream & outStream, const Email & email)
+std::ostream& operator<<(std::ostream & outStream, const Email & email)
 {
 	outStream << "Name:\t";
 	return outStream;
@@ -102,7 +103,7 @@ std::ostream& operator<<(ostream & outStream, const Email & email)
 
 std::istream& operator >> (std::istream & inStream, Email & email)
 {
-	string str;
+	std::string str;
 	inStream >> str;
 	return inStream;
 }

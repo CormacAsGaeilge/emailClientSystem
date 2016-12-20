@@ -6,11 +6,11 @@
 #include "Attachment.h"
 class Email
 {
-	int count = 0;
+
 	friend std::ostream& operator<<(std::ostream& outStream, const Email& user);
 	friend std::istream& operator >> (std::istream& inStream, Email& user);
-
 public:
+	static int count;
 	Email();
 	Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body); //multi recipient 0 attachment
 	Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body, std::vector<Attachment> attachments); //multi recipient multi attachment

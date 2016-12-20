@@ -17,9 +17,44 @@ void searchBy(User *user);
 void menu(User *user);
 void openUserMenu(User *user);
 void newEmail(User *user);
+void sortMenu(User *user, BoxType boxType);
+
+
+bool subjectGreaterThan(Email * e1, Email * e2)
+{
+	if (e1->getSubject() > e2->getSubject())
+		return true;
+	else
+		return false;
+}
+bool bodyGreaterThan(Email * e1, Email * e2)
+{
+	if (e1->getSubject() >= e2->getSubject())
+		return true;
+	else
+		return false;
+}
+bool recipientsGreaterThan(Email * e1, Email * e2)
+{
+	if (e1->getRecipients().size() >= e2->getRecipients().size())
+		return true;
+	else
+		return false;
+}
+bool attachmentsGreaterThan(Email * e1, Email * e2)
+{
+	if (e1->getAttachments().size() >= e2->getAttachments().size())
+		return true;
+	else
+		return false;
+}
+
+
 template <typename T>
 void swap(T* pArray, int i, int j);
-void selectionSort(User* pArray, int length);
+
+template<typename T>
+void selectionSort(T* pArray, bool(*funct)(T*, T*), int length);
 
 int main()
 {
@@ -40,7 +75,8 @@ void swap(T* pArray, int i, int j)
 	T temp = pArray[i];	pArray[i] = pArray[j]; 	pArray[j] = temp;
 }
 
-void selectionSort(User* pArray, int length)
+template<typename T>
+void selectionSort(T* pArray, bool(*funct)(T*, T*), int length)
 {
 	if (pArray == nullptr || length <= 0)
 		return;
@@ -50,7 +86,7 @@ void selectionSort(User* pArray, int length)
 		int minPos = i;
 		for (int j = i + 1; j < length; j++)
 		{
-			if (pArray[minPos].getName() > pArray[j].getName())
+			if (funct)
 				minPos = j;
 		}
 		if (minPos != i)
@@ -175,7 +211,10 @@ void viewEmail(User *user)
 		std::cout << "(2) View Outbox" << std::endl;
 		std::cout << "(3) View Sentbox" << std::endl;
 		std::cout << "(4) View Deleted Emails" << std::endl;
-		std::cout << "(5) Back" << std::endl;
+		std::cout << "(5) Sort Inbox" << std::endl;
+		std::cout << "(6) Sort Outbox" << std::endl;
+		std::cout << "(7) Sort SentBox" << std::endl;
+		std::cout << "(8) Back" << std::endl;
 		std::cin >> answer;
 
 		switch (answer)
@@ -195,8 +234,17 @@ void viewEmail(User *user)
 		case 4:
 			user->printBox(DeletedboxType);
 			break;
-
 		case 5:
+			sortMenu(user, InboxType);
+			break;
+		case 6:
+			sortMenu(user, OutboxType);
+			break;
+		case 7:
+			sortMenu(user, SentboxType);
+			break;
+
+		case 8:
 			check = false;
 			break;
 
@@ -412,11 +460,11 @@ void newEmail(User *user)
 	std::string recipient, subject, body, checkAttachment;
 	std::cout << "________________NEW EMAIL________________" << std::endl;
 	std::cout << "Enter Subject:\t";
-	std::getline(cin, subject);
+	std::getline(std::cin, subject);
 	std::cin.ignore();
 
 	std::cout << "Enter Body:\t";
-	std::getline(cin, body);
+	std::getline(std::cin, body);
 	std::cin.ignore();
 
 	bool check = true;
@@ -427,8 +475,8 @@ void newEmail(User *user)
 		if (checkAttachment == "Y")
 		{
 			int attachCount;
-			cout << "How many Attachments?" << endl;
-			cin >> attachCount;
+			std::cout << "How many Attachments?" << std::endl;
+			std::cin >> attachCount;
 
 			std::vector<Attachment> attachments;
 			for (int i = 0; i < attachCount; i++)
@@ -450,11 +498,11 @@ void newEmail(User *user)
 			check = false;
 		}
 		else
-			std::cout << "Please enter either Y or N" << endl;
+			std::cout << "Please enter either Y or N" << std::endl;
 	}
 
 
-	std::cout << "How many recipents?" << endl;
+	std::cout << "How many recipents?" << std::endl;
 	std::cin >> recCount;
 
 	for (int i = 0; i < recCount; i++)
@@ -467,21 +515,77 @@ void newEmail(User *user)
 
 }
 
+
 void reset(User *user)
 {
-	std::string answer;
-	std::cout << "Do you really want to reset everything? [Y/N]" << std::endl;
-	std::cin >> answer;
-
-	if(answer == "Y")
+	bool check = true;
+	while (check)
 	{
+		std::string answer;
+		std::cout << "Do you really want to reset everything? [Y/N]" << std::endl;
+		std::cin >> answer;
 
+		if (answer == "Y")
+		{
+			//RESET EVERTHING
+			check = false;
+		}
+		else if (answer == "N")
+		{
+			check = false;
+		}
+		else
+			std::cout << "Please enter either Y or N" << std::endl;
 	}
-	else if (answer == "N")
+}
+
+void sortMenu(User *user, BoxType boxType)
+{
+	bool check = true;
+	std::stack<Email*, std::vector<Email*>>* box = user->getBoxType(boxType);
+
+	while (check)
 	{
+		User currentUser;
+		int answer;
+		std::vector<Email*> temp;
+		std::cout << "(1) Sort by subject" << std::endl;
+		std::cout << "(2) Sort by body" << std::endl;
+		std::cout << "(3) Sort by number of recipients" << std::endl;
+		std::cout << "(4) Sort by number of attachments" << std::endl;
+		std::cout << "(5) Back" << std::endl;
+		std::cin >> answer;
+		bool(*pFunc)(Email*, Email*);
+
 		
-	}
-	else
-		std::cout << "Please enter either Y or N" << endl;
 
+		switch (answer)
+		{
+		case 1:
+			
+			pFunc = &subjectGreaterThan;
+			Email *eArray;
+			//selectionSort(Email *eArray, pFunc, box->size());
+			break;
+
+		case 2:
+			
+			break;
+
+		case 3:
+
+			break;
+
+		case 4:
+
+			break;
+
+		case 5:
+			check = false;
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+	}
 }
