@@ -63,6 +63,12 @@ int main()
 	User user("Paddy", "paddyPassword", "paddy@gmail.com");
 	populateEmails(user);
 
+	User test("Rani", "hello892ItsRani", "paddy@gmail.com");
+	std::cout << test.getPassword() << std::endl;
+	std::vector<User> userVector;
+	userVector.push_back(test);
+	for (User u : userVector)
+		std::cout << u << std::endl;
 	menu(&user);
 
 	system("pause");
@@ -101,7 +107,7 @@ void populateEmails(User &user)
 	for (int j = 0; j < 10; j++)
 	{
 		//randomise body and subject too
-		std::string address = j +"address@gmail.com";
+		std::string address ="address@gmail.com";
 		recipients.push_back(address);
 		user.createNewEmail(new Email(user.getEmailAddress(), recipients, subject, body));
 		recipients.pop_back();

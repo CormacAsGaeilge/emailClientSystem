@@ -20,11 +20,12 @@ public:
 
 	//Add Validation
 	void setId(unsigned int id) { Email::id = id; } 
-	void setSender(std::string sender) { Email::sender = sender; } //Valid email (regex) 
+	void setSender(std::string sender);	//Valid email (regex) 
 	void setRecipient(std::vector<std::string> recipients); //Valid email(s) (regex) 
 	void setSubject(std::string subject) { Email::subject = subject; }
-	void setBody(std::string body) { Email::body = body; } //Length >= 1 character
+	void setBody(std::string body); //Lenght >=1
 	void setAttachment(std::vector<Attachment> attachments) { Email::attachments = attachments; }
+	bool regexValidateTwo(std::string expression, std::string email);
 
 	void print();
 

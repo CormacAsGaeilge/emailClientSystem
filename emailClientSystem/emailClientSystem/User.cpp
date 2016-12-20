@@ -1,5 +1,4 @@
 #include "User.h"
-#include "Email.h"
 #include "DynamicArray.h"
 #include <iostream>
 #include <string>
@@ -26,10 +25,8 @@ User::~User()
 //SETTERS WILL BE RE_WRITTEN INTO SIMPLE FORM
 void User::setName(std::string name)
 {
-	if (name.length() >= 8)
-		User::name = "default_name";
-	else
-		User::name = name;  //Length >= 8 
+	//Length >= 8 
+	User::name = (name.length() < 8) ? name : "default_name";
 		
 }
 
@@ -46,7 +43,7 @@ void User::setPassword(std::string password)
 	{
 		y[i] = password[i];
 	}
-	
+
 	std::string validation;
 	int valid1 = 0;
 	int valid2 = 0;
@@ -63,17 +60,31 @@ void User::setPassword(std::string password)
 				valid3++;
 		}
 	}
-	if (valid1 > 0 && valid2 > 0 && valid3 > 0)
-		User::password = password;
+		if (valid1 > 0 && valid2 > 0 && valid3 > 0)
+			User::password = password;
+		else
+			User::password = "default_password";
+}
+
+bool regexValidate(std::string expression, std::string email)
+{
+	std::regex ex(expression);
+	if (regex_match(email, ex)) {
+		return true;
+		std::cout << "true";
+	}
 	else
-		User::password = "default_password";
+		return false;
 }
 
 void User::setEmailAddress(std::string emailAddress)
 {
 	//Valid email (regex)
-	std::string regex = "\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b";
-	User::emailAddress = emailAddress;
+	std::string regex = "[\\w]+@[\\w]+.[\\w]{2,3}";
+	if (regexValidate(regex, emailAddress))
+		User::emailAddress = emailAddress;
+	else
+		User::emailAddress = "deafault_email";
 }
 	 
 
@@ -336,6 +347,7 @@ std::stack<Email*, std::vector<Email*>>* User::getBoxType(BoxType boxType)
 	else
 		return &deletedbox;
 }
+
 
 std::ostream& operator<<(std::ostream & outStream, const User & user)
 {
