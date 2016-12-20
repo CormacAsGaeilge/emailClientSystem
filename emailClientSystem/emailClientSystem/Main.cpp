@@ -83,6 +83,7 @@ void swap(std::vector<T*> vector, int i, int j)
 template<typename T>
 void selectionSort(std::vector<T*> vector, bool(*funct)(T*, T*), int length)
 {
+	//SELECTION SORT
 	if (length <= 0)
 		return;
 
@@ -560,12 +561,13 @@ void sortMenu(User *user, BoxType boxType)
 		std::cout << "(4) Sort by number of attachments" << std::endl;
 		std::cout << "(5) Back" << std::endl;
 		std::cin >> answer;
-		bool(*pFunc)(Email*, Email*);
-		pFunc = &subjectGreaterThan;
+
+		bool(*pFunc)(Email*, Email*); //new pointer to function
+		pFunc = &subjectGreaterThan;  //default pFunc
 		std::vector<Email*> vec;
 		for (int i = 0; i < box->size(); i++)
 		{
-			vec.push_back(box->top());
+			vec.push_back(box->top()); //populate vector to be sorted
 			box->pop();
 		}
 
@@ -600,13 +602,10 @@ void sortMenu(User *user, BoxType boxType)
 			std::cout << "Bad choice! Please try again.\n";
 		}
 
-		selectionSort(vec, pFunc, box->size());
+		selectionSort(vec, pFunc, box->size()); //sort
 		for (int i = 0; i < box->size(); i++)
 		{
-			box->push(vec[i]);
+			box->push(vec[i]); //repopulate stack with sorted objects
 		}
 	}
-	else
-		std::cout << "Please enter either Y or N" << std::endl;
-
 }
