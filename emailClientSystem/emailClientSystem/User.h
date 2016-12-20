@@ -36,7 +36,8 @@ public:
 	Email* searchEmailUsingSubject(std::string userInput, BoxType boxType);						//needs boxType
 	std::vector<Email*> searchEmailUsingSubjectReturnAll(std::string userInput, BoxType boxType);	//needs boxType
 	Email* searchEmailByID(unsigned int userInput, BoxType boxType);			
-	
+	Email* searchEmailByPresenceOfAttachments(BoxType boxType);
+
 	bool deleteEmail(unsigned int emailId, BoxType boxType); 
 	bool deletedAllEmails(BoxType boxType);
 	bool emptyDeletedEmails();

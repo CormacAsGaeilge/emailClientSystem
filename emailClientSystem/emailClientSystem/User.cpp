@@ -139,7 +139,7 @@ Email* User::searchEmailUsingSubject(std::string userInput, BoxType boxType)
 	while (size > 0)
 	{
 		if (box->top()->getSubject() == userInput)
-			email = box->top();
+			Email *email = box->top();
 		tempBox.push(box->top());
 		box->pop();
 		size = box->size();
@@ -215,6 +215,32 @@ Email* User::searchEmailByID(unsigned int userInput, BoxType boxType)
 	}
 
 	return email; //returns email with the requested id
+}
+
+Email * User::searchEmailByPresenceOfAttachments(BoxType boxType)
+{
+	Email *email = nullptr;
+	std::stack<Email*, std::vector<Email*>>* box = User::getBoxType(boxType), tempBox;
+
+	size_t size = box->size();
+	//remove emails from stack
+	while (size > 0)
+	{
+		if (box->top()->getAttachments().size() > 0)
+			email = box->top();
+		tempBox.push(box->top());
+		box->pop();
+		size = box->size();
+	}
+	size = tempBox.size();
+	while (size > 0)
+	{
+		box->push(tempBox.top());
+		tempBox.pop();
+		size = tempBox.size();
+	}
+
+	return email;
 }
 
 bool User::deleteEmail(unsigned int emailId, BoxType boxType)

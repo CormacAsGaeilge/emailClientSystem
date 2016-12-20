@@ -1,3 +1,4 @@
 ﻿  Main.cpp
-  emailClientSystem.vcxproj -> C:\Users\iiSon\emailClientSystem\emailClientSystem\Debug\emailClientSystem.exe
-  emailClientSystem.vcxproj -> C:\Users\iiSon\emailClientSystem\emailClientSystem\Debug\emailClientSystem.pdb (Partial PDB)
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\main.cpp(382): warning C4018: '<': signed/unsigned mismatch
+  emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.exe
+  emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.pdb (Partial PDB)

@@ -12,7 +12,8 @@ void populateEmails(User &user);
 void deletEmail(User *user);
 void deleteAllEmails(User *user);
 void viewEmail(User *user);
-
+void reset(User *user);
+void searchBy(User *user);
 void menu(User *user);
 void openUserMenu(User *user);
 void newEmail(User *user);
@@ -151,15 +152,15 @@ void openUserMenu(User *user)
 			break;
 
 		case 5:
-			check = false;
+			searchBy(user);
 			break;
 
 		case 6:
-			check = false;
+			reset(user);
 			break;
 
 		case 7:
-			menu(user);
+			check = false;
 			break;
 
 		default:
@@ -202,7 +203,7 @@ void viewEmail(User *user)
 			break;
 
 		case 5:
-			openUserMenu(user);
+			check = false;
 			break;
 
 		default:
@@ -256,7 +257,7 @@ void deletEmail(User* user)
 			break;
 
 		case 5:
-			openUserMenu(user);
+			check = false;
 			break;
 
 		default:
@@ -303,7 +304,7 @@ void deleteAllEmails(User *user)
 			break;
 
 		case 5:
-			openUserMenu(user);
+			check = false;
 			break;
 
 		default:
@@ -312,6 +313,103 @@ void deleteAllEmails(User *user)
 	}
 }
 
+void searchBy(User * user)
+{
+	std::cout << "________________Search By________________" << std::endl;
+	bool check = true;
+	std::string userInput;
+	int userId;
+	BoxType boxType;
+
+
+	std::cout << "Choose Which Inbox to search in:\n" << std::endl;
+	while (check)
+	{
+		User currentUser;
+		int answer;
+		std::cout << "(1) Inbox" << std::endl;
+		std::cout << "(2) Outbox" << std::endl;
+		std::cout << "(3) Sentbox" << std::endl;
+		std::cout << "(4) Deleted Emails" << std::endl;
+		std::cout << "(5) Back" << std::endl;
+		std::cin >> answer;
+
+		switch (answer)
+		{
+		case 1:
+			boxType = InboxType;
+			std::cout << "________________INBOX________________" << std::endl;
+			check = false;
+			break;
+
+		case 2:
+			boxType = OutboxType;
+			std::cout << "________________OUTBOX________________" << std::endl;
+			check = false;
+			break;
+
+		case 3:
+			boxType = SentboxType;
+			std::cout << "________________SENTBOX________________" << std::endl;
+			check = false;
+			break;
+
+		case 4:
+			boxType = DeletedboxType;
+			std::cout << "________________DELETEDBOX________________" << std::endl;
+			check = false;
+			break;
+
+		case 5:
+			check = false;
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+
+	}
+
+	check = true;
+
+	while (check)
+	{
+		User currentUser;
+		int answer;
+		std::vector<Email*> temp;
+		std::cout << "(1) Search by id" << std::endl;
+		std::cout << "(2) Search by subject" << std::endl;
+		std::cout << "(3) Search by presence of attachments" << std::endl;
+		std::cout << "(4) Back" << std::endl;
+		std::cin >> answer;
+
+		switch (answer)
+		{
+		case 1:
+			std::cin >> userId;
+			std::cout << user->searchEmailByID(userId, boxType);
+			break;
+
+		case 2:
+			std::cin >> userInput;
+			temp = user->searchEmailUsingSubjectReturnAll(userInput, boxType);
+			for (int i = 0; i < temp.size(); i++)
+				std::cout << temp[i];
+			break;
+
+		case 3:
+			std::cout << user->searchEmailByPresenceOfAttachments(boxType);
+			break;
+
+		case 4:
+			check = false;
+			break;
+
+		default:
+			std::cout << "Bad choice! Please try again.\n";
+		}
+	}
+}
 
 void newEmail(User *user)
 {
@@ -372,5 +470,24 @@ void newEmail(User *user)
 
 		recipients.push_back(recipient);
 	}
+
+}
+
+void reset(User *user)
+{
+	std::string answer;
+	std::cout << "Do you really want to reset everything? [Y/N]" << std::endl;
+	std::cin >> answer;
+
+	if(answer == "Y")
+	{
+
+	}
+	else if (answer == "N")
+	{
+		
+	}
+	else
+		std::cout << "Please enter either Y or N" << endl;
 
 }
