@@ -7,7 +7,8 @@
 #include <algorithm>
 #include <string>
 #include <chrono>
-#include <cstdlib>
+
+//Method declorations
 void populateEmails(User &user);
 void deletEmail(User *user);
 void deleteAllEmails(User *user);
@@ -19,7 +20,7 @@ void openUserMenu(User *user);
 void newEmail(User *user);
 void sortMenu(User *user, BoxType boxType);
 
-
+//Pointer functions
 bool subjectGreaterThan(Email * e1, Email * e2)
 {
 	if (e1->getSubject() > e2->getSubject())
@@ -49,6 +50,7 @@ bool attachmentsGreaterThan(Email * e1, Email * e2)
 		return false;
 }
 
+//generic template classes 
 template <typename T>
 void swap(std::vector<T*> vector, int i, int j);
 
@@ -56,30 +58,32 @@ template<typename T>
 void selectionSort(std::vector<T*> vector, bool(*funct)(T*, T*), int length);
 
 int main()
-{
-	int length = 5;
-	
+{	
 	User user("Paddy", "paddyPassword", "paddy@gmail.com");
 	populateEmails(user);
 
-	User test("Rani", "hello892ItsRani", "paddy@gmail.com");
+	//Validation tests
+	/*User test("Rani", "hello892ItsRani", "paddy@gmail.com");
 	std::cout << test.getPassword() << std::endl;
 	std::vector<User> userVector;
 	userVector.push_back(test);
 	for (User u : userVector)
-		std::cout << u << std::endl;
+		std::cout << u << std::endl;*/
+
 	menu(&user);
 
 	system("pause");
 	return 0;
 }
 
+//swaps two items in a vector
 template <typename T>
 void swap(std::vector<T*> vector, int i, int j)
 {
 	T* temp = vector[i];	vector[i] = vector[j]; 	vector[j] = temp;
 }
 
+//sorts a vector of type T objects 
 template<typename T>
 void selectionSort(std::vector<T*> vector, bool(*funct)(T*, T*), int length)
 {
@@ -98,14 +102,13 @@ void selectionSort(std::vector<T*> vector, bool(*funct)(T*, T*), int length)
 			swap(vector, minPos, i);
 	}
 }
+//Manually poppulates Emails 
 void populateEmails(User &user)
 {
 	std::vector<std::string> recipients; 
 	std::string subject = "email subject line", body = "email content body";
-	int randomUser = 0; //needs to be set to random
 	for (int j = 0; j < 10; j++)
 	{
-		//randomise body and subject too
 		std::string address ="address@gmail.com";
 		recipients.push_back(address);
 		user.createNewEmail(new Email(user.getEmailAddress(), recipients, subject, body));
@@ -113,6 +116,7 @@ void populateEmails(User &user)
 	}
 }
 
+//Menu system
 void menu(User *user)
 {
 	bool check = true;
@@ -141,25 +145,25 @@ void menu(User *user)
 	}
 }
 
-
+//Our menu project
 void openUserMenu(User *user)
 {
-	bool check = true;
-	std::string password = user->getPassword();
-	int passwordLength = password.length();
-	std::string hiddenPassword = "*";
-	for (int i = 0; i < passwordLength; i++)
-		hiddenPassword += "*";
+	bool check = true; //while true
+	std::string password = user->getPassword(); //points to password
+	int passwordLength = password.length(); 
+	std::string hiddenPassword = "*"; 
+	for (int i = 0; i < passwordLength; i++) //loop to hide user password
+		hiddenPassword += "*"; //Just for display purpose
 	std::cout <<
 		"USER:\t" << user->getName() <<
-		"\nEMAIL ADDRESS:\t" << user->getEmailAddress() <<
+ 		"\nEMAIL ADDRESS:\t" << user->getEmailAddress() <<
 		"\nPASSWORD:\t" << hiddenPassword << std::endl;
-
-	while (check)
+	//user select section
+	while (check) 
 	{
 		User currentUser;
 		int answer;
-		std::cout << "(1) New" << std::endl;
+		std::cout << "(1) New" << std::endl; //user chooses a number 
 		std::cout << "(2) View" << std::endl;
 		std::cout << "(3) Delete" << std::endl;
 		std::cout << "(4) Delete All" << std::endl;
@@ -204,6 +208,7 @@ void openUserMenu(User *user)
 	}
 }
 
+//View emails menu
 void viewEmail(User *user)
 {
 	bool check = true;
@@ -221,7 +226,7 @@ void viewEmail(User *user)
 		std::cout << "(7) Sort SentBox" << std::endl;
 		std::cout << "(8) Back" << std::endl;
 		std::cin >> answer;
-
+		//Print / Sort Any inbox
 		switch (answer)
 		{
 		case 1:
@@ -260,7 +265,7 @@ void viewEmail(User *user)
 
 	}
 }
-
+//delete emails menu 
 void deletEmail(User* user)
 {
 	bool check = true;
@@ -313,6 +318,7 @@ void deletEmail(User* user)
 	}
 }
 
+//delete all emails menu
 void deleteAllEmails(User *user)
 {
 	bool check = true;
@@ -327,7 +333,7 @@ void deleteAllEmails(User *user)
 		std::cout << "(4) Delete All From Deleted Emails" << std::endl;
 		std::cout << "(5) Back" << std::endl;
 		std::cin >> answer;
-
+		//User selects which box to delete all emails from
 		switch (answer)
 		{
 		case 1:
@@ -360,6 +366,7 @@ void deleteAllEmails(User *user)
 	}
 }
 
+//search menu
 void searchBy(User * user)
 {
 	std::cout << "________________Search By________________" << std::endl;
@@ -380,7 +387,7 @@ void searchBy(User * user)
 		std::cout << "(4) Deleted Emails" << std::endl;
 		std::cout << "(5) Back" << std::endl;
 		std::cin >> answer;
-
+		//Users select boxType
 		switch (answer)
 		{
 		case 1:
@@ -457,7 +464,7 @@ void searchBy(User * user)
 		}
 	}
 }
-
+//Adds emails to outbox redy to be sent
 void newEmail(User *user)
 {
 	int recCount;
@@ -532,7 +539,7 @@ void reset(User *user)
 
 		if (answer == "Y")
 		{
-			//RESET EVERTHING
+			user->~User(); //calls destructor
 			check = false;
 		}
 		else if (answer == "N")
@@ -606,7 +613,4 @@ void sortMenu(User *user, BoxType boxType)
 			box->push(vec[i]);
 		}
 	}
-	else
-		std::cout << "Please enter either Y or N" << std::endl;
-
 }
