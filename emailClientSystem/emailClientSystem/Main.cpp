@@ -594,4 +594,7 @@ void sortMenu(User *user, BoxType boxType)
 			std::cout << "Bad choice! Please try again.\n";
 		}
 	}
+	else
+		std::cout << "Please enter either Y or N" << std::endl;
+
 }

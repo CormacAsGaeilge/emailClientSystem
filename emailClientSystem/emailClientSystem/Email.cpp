@@ -56,6 +56,7 @@ Email::Email(std::string sender, std::string subject, std::string body, std::vec
 
 Email::~Email()
 {
+	
 }
 
 bool Email::regexValidateTwo(std::string expression, std::string email)

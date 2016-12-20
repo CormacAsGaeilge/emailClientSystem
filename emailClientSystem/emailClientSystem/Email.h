@@ -47,6 +47,5 @@ private:
 	std::vector<std::string> recipients;
 	std::time_t date; //Valid time object
 	std::vector<Attachment> attachments;
-	
 };
 

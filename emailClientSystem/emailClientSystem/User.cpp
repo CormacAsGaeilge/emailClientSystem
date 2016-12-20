@@ -18,70 +18,104 @@ User::User(std::string name, std::string password, std::string emailAddress)
 	inboxSize = 0;
 }
 
+//De-Constructer
+//Resetting All Emails
 User::~User()
 {
+	size_t size = User::inbox.size();
+	while (size > 0)
+	{
+		inbox.top() = nullptr;
+		inbox.pop();
+		size--;
+	}
+
+	size = User::outbox.size();
+	while (size > 0)
+	{
+		outbox.top() = nullptr;
+		outbox.pop();
+		size--;
+	}
+
+	size = User::sentbox.size();
+	while (size > 0)
+	{
+		sentbox.top() = nullptr;
+		sentbox.pop();
+		size--;
+	}
+
+	size = User::deletedbox.size();
+	while (size > 0)
+	{
+		deletedbox.top() = nullptr;
+		deletedbox.pop();
+		size--;
+	}
+
 }
 
-//SETTERS WILL BE RE_WRITTEN INTO SIMPLE FORM
+//Setter for name
 void User::setName(std::string name)
 {
-	//Length >= 8 
-	User::name = (name.length() < 8) ? name : "default_name";
-		
+	//Length must be <= 8 characters
+	User::name = (name.length() <= 8) ? name : "default_name";		
 }
 
-//NOT TESTED 
-//LONG AND NEEDS CLEANING UP 
-//ILL GET BACK TO THIS 
+//HOW Paddy's brain works
+//Password Validation
 void User::setPassword(std::string password)
 {
 
 	//Length >= 8 characters;
 	//Must contain minimum of 1 number and 1 letter(non - case senstive).
-	char *y = new char[password.length() + 1];
-	for (int i = 0; i < password.length(); i++)
+	char *y = new char[password.length() + 1]; //setting up a Character Array
+	for (int i = 0; i < password.length(); i++) 
 	{
-		y[i] = password[i];
+		y[i] = password[i];   //population character array
 	}
-
+	//setting up a vaviable for each requirenment 
 	std::string validation;
 	int valid1 = 0;
 	int valid2 = 0;
 	int valid3 = 0;
-	if (password.length() >= 8)
+	if (password.length() >= 8) // Requrement #1 Must be Greater than or equal 8
 	{
-		for (int i = 0; i <= password.length(); i++)
+		for (int i = 0; i <= password.length(); i++) //looping through each character in the array to check type;
 		{
-			if (y[i] >= 65 && y[i] <= 90)
+			if (y[i] >= 65 && y[i] <= 90) // If the character is between numbers its UPPERCASE
 				valid1++;
-			if (y[i] >= 97 && y[i] <= 122)
+			if (y[i] >= 97 && y[i] <= 122) //LOWERCASE
 				valid2++;
-			if (y[i] >= 48 && y[i] <= 57)
+			if (y[i] >= 48 && y[i] <= 57)//NUMBERS
 				valid3++;
 		}
 	}
-		if (valid1 > 0 && valid2 > 0 && valid3 > 0)
+		if (valid1 > 0 && valid2 > 0 && valid3 > 0) //Must have at least one of each to be a valid password
 			User::password = password;
 		else
 			User::password = "default_password";
 }
 
+// http://stackoverflow.com/questions/26965672/using-regex-for-input-validation
+//Use this method to create Regex validation
 bool regexValidate(std::string expression, std::string email)
 {
-	std::regex ex(expression);
-	if (regex_match(email, ex)) {
+	std::regex ex(expression); //simplify expresssion 
+	if (regex_match(email, ex)) { //checks if email matches expression
 		return true;
-		std::cout << "true";
 	}
 	else
 		return false;
 }
 
+//Email validation
 void User::setEmailAddress(std::string emailAddress)
 {
 	//Valid email (regex)
-	std::string regex = "[\\w]+@[\\w]+.[\\w]{2,3}";
-	if (regexValidate(regex, emailAddress))
+	std::string regex = "[\\w]+@[\\w]+.[\\w]{2,3}"; //Simple Email Regex
+	if (regexValidate(regex, emailAddress)) //If match is true then ist valid
 		User::emailAddress = emailAddress;
 	else
 		User::emailAddress = "deafault_email";
