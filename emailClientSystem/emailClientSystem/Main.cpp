@@ -119,7 +119,7 @@ void menu(User *user)
 	while (check)
 	{
 		int answer;
-
+		std::cout << "TO CHOOSE AN OPTION IN A MENU TYPE THE NUMBER SEEN TO THE LEFT IN THE BRACKETS. e.g. type '1' to Open the user menu." << std::endl;
 		std::cout << "(1) Open User" << std::endl;
 		std::cout << "(2) Exit" << std::endl;
 

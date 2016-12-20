@@ -5,6 +5,9 @@
 #include <exception>
 #include <regex>
 
+
+int Email::count = 0;
+
 User::User():User("defaultName","defaoultPassword","defaultEmailAddress")
 {
 }

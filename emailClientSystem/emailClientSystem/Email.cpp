@@ -5,7 +5,12 @@
 #include <ctime>
 #include <chrono>
 #include <regex>
-#pragma warning(disable : 4996) //time needs to be changed from localtime to s_localtime
+#pragma warning(disable : 4996) 
+/*time needs to be changed from localtime to s_localtime
+Tried to change this and ran into errors
+researching this error this is not a problem as only 
+Microsoft are the ones who want you to use s_localtime
+Alternative is localtime_m*/
 
 int Email::count = 0;
 

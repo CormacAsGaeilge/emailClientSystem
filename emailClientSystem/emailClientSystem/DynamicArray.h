@@ -5,6 +5,7 @@ template <typename T>
 class DynamicArray
 {
 public:
+	/*******************************Constructor*********************************/
 	DynamicArray(int length);
 	~DynamicArray();
 

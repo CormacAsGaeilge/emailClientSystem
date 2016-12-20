@@ -6,11 +6,12 @@
 #include "Attachment.h"
 class Email
 {
-
+	/*******************************Stream Operators*********************************/
 	friend std::ostream& operator<<(std::ostream& outStream, const Email& user);
 	friend std::istream& operator >> (std::istream& inStream, Email& user);
 public:
 	static int count;
+	/*******************************Constructor*********************************/
 	Email();
 	Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body); //multi recipient 0 attachment
 	Email(std::string sender, std::vector<std::string> recipients, std::string subject, std::string body, std::vector<Attachment> attachments); //multi recipient multi attachment
@@ -18,10 +19,10 @@ public:
 	Email(std::string sender, std::string subject, std::string body, std::vector<Attachment> attachments);
 	~Email();
 
-	//Add Validation
+	/*******************************Setters*********************************/
 	void setId(unsigned int id) { Email::id = id; } 
-	void setSender(std::string sender);	//Valid email (regex) 
-	void setRecipient(std::vector<std::string> recipients); //Valid email(s) (regex) 
+	void setSender(std::string sender);	
+	void setRecipient(std::vector<std::string> recipients); 
 	void setSubject(std::string subject) { Email::subject = subject; }
 	void setBody(std::string body); //Lenght >=1
 	void setAttachment(std::vector<Attachment> attachments) { Email::attachments = attachments; }
@@ -29,6 +30,7 @@ public:
 
 	void print();
 
+	/*******************************Getters*********************************/
 	unsigned int getId() { return Email::id; }
 	std::string getSender() { return Email::sender; }
 	std::vector<std::string> getRecipients();
@@ -37,7 +39,7 @@ public:
 	std::time_t getDate();
 	std::vector<Attachment> getAttachments() { return Email::attachments; }
 
-	//(==, !=, =, <<, and >>)
+	/*******************************Operator Overloading*********************************/
 	bool operator>(const Email& other);
 	bool operator==(const Email& other);
 	bool operator!=(const Email& other);
@@ -52,6 +54,7 @@ public:
 		Email::attachments = other.attachments;
 	}
 private:
+	/*******************************Variables*********************************/
 	unsigned int id;
 	std::string sender, subject, body;
 	std::vector<std::string> recipients;
