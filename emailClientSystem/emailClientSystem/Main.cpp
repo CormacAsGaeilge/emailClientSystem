@@ -27,7 +27,12 @@ int main()
 	User user("Paddy", "paddyPassword", "paddy@gmail.com");
 	populateEmails(user);
 
-	
+	User test("Rani", "hello892ItsRani", "paddy@gmail.com");
+	std::cout << test.getPassword() << std::endl;
+	std::vector<User> userVector;
+	userVector.push_back(test);
+	for (User u : userVector)
+		std::cout << u << std::endl;
 	menu(&user);
 
 	system("pause");
@@ -65,7 +70,7 @@ void populateEmails(User &user)
 	for (int j = 0; j < 10; j++)
 	{
 		//randomise body and subject too
-		std::string address = j +"address@gmail.com";
+		std::string address ="address@gmail.com";
 		recipients.push_back(address);
 		user.createNewEmail(new Email(user.getEmailAddress(), recipients, subject, body));
 		recipients.pop_back();
@@ -315,11 +320,11 @@ void newEmail(User *user)
 	std::string recipient, subject, body, checkAttachment;
 	std::cout << "________________NEW EMAIL________________" << std::endl;
 	std::cout << "Enter Subject:\t";
-	std::getline(cin, subject);
+	std::getline(std::cin, subject);
 	std::cin.ignore();
 
 	std::cout << "Enter Body:\t";
-	std::getline(cin, body);
+	std::getline(std::cin, body);
 	std::cin.ignore();
 
 	bool check = true;
@@ -330,8 +335,8 @@ void newEmail(User *user)
 		if (checkAttachment == "Y")
 		{
 			int attachCount;
-			cout << "How many Attachments?" << endl;
-			cin >> attachCount;
+			std::cout << "How many Attachments?" << std::endl;
+			std::cin >> attachCount;
 
 			std::vector<Attachment> attachments;
 			for (int i = 0; i < attachCount; i++)
@@ -353,11 +358,11 @@ void newEmail(User *user)
 			check = false;
 		}
 		else
-			std::cout << "Please enter either Y or N" << endl;
+			std::cout << "Please enter either Y or N" << std::endl;
 	}
 
 
-	std::cout << "How many recipents?" << endl;
+	std::cout << "How many recipents?" << std::endl;
 	std::cin >> recCount;
 
 	for (int i = 0; i < recCount; i++)

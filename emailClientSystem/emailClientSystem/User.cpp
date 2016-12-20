@@ -1,5 +1,4 @@
 #include "User.h"
-#include "Email.h"
 #include "DynamicArray.h"
 #include <iostream>
 #include <string>
@@ -26,10 +25,8 @@ User::~User()
 //SETTERS WILL BE RE_WRITTEN INTO SIMPLE FORM
 void User::setName(std::string name)
 {
-	if (name.length() >= 8)
-		User::name = "default_name";
-	else
-		User::name = name;  //Length >= 8 
+	//Length >= 8 
+	User::name = (name.length() < 8) ? name : "default_name";
 		
 }
 
@@ -38,9 +35,15 @@ void User::setName(std::string name)
 //ILL GET BACK TO THIS 
 void User::setPassword(std::string password)
 {
+
 	//Length >= 8 characters;
 	//Must contain minimum of 1 number and 1 letter(non - case senstive).
 	char *y = new char[password.length() + 1];
+	for (int i = 0; i < password.length(); i++)
+	{
+		y[i] = password[i];
+	}
+
 	std::string validation;
 	int valid1 = 0;
 	int valid2 = 0;
@@ -49,27 +52,39 @@ void User::setPassword(std::string password)
 	{
 		for (int i = 0; i <= password.length(); i++)
 		{
-			if (*y >= 65 && *y <= 90)
+			if (y[i] >= 65 && y[i] <= 90)
 				valid1++;
-			if (*y >= 97 && *y <= 122)
+			if (y[i] >= 97 && y[i] <= 122)
 				valid2++;
-			if (*y >= 48 && *y <= 57)
+			if (y[i] >= 48 && y[i] <= 57)
 				valid3++;
 		}
 	}
-
-	if (valid1 > 0 && valid2 > 0 && valid3 > 0)
-		User::password = password;
-	else
-		User::password = "default_password";
+		if (valid1 > 0 && valid2 > 0 && valid3 > 0)
+			User::password = password;
+		else
+			User::password = "default_password";
 }
 
+bool regexValidate(std::string expression, std::string email)
+{
+	std::regex ex(expression);
+	if (regex_match(email, ex)) {
+		return true;
+		std::cout << "true";
+	}
+	else
+		return false;
+}
 
 void User::setEmailAddress(std::string emailAddress)
 {
 	//Valid email (regex)
-	std::string regex = "\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b";
-	User::emailAddress = emailAddress;
+	std::string regex = "[\\w]+@[\\w]+.[\\w]{2,3}";
+	if (regexValidate(regex, emailAddress))
+		User::emailAddress = emailAddress;
+	else
+		User::emailAddress = "deafault_email";
 }
 	 
 
@@ -310,7 +325,7 @@ std::stack<Email*, std::vector<Email*>>* User::getBoxType(BoxType boxType)
 }
 
 
-std::ostream& operator<<(ostream & outStream, const User & user)
+std::ostream& operator<<(std::ostream & outStream, const User & user)
 {
 	outStream << "Name:\t" << user.name << "\nEmail:\t" << user.emailAddress << "\n";
 	return outStream;
@@ -318,7 +333,7 @@ std::ostream& operator<<(ostream & outStream, const User & user)
 
 std::istream& operator >> (std::istream & inStream, User & user)
 {
-	string str;
+	std::string str;
 	inStream >> str;
 	return inStream;
 }
