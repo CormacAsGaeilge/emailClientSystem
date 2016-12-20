@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Email.cpp
 c:\users\iison\emailclientsystem\emailclientsystem\emailclientsystem\email.cpp(82): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
@@ -15,5 +16,11 @@ i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\main.cpp(438):
 i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\main.cpp(567): warning C4101: 'eArray': unreferenced local variable
   Email.cpp
   Generating Code...
+=======
+﻿  Main.cpp
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\main.cpp(443): warning C4018: '<': signed/unsigned mismatch
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\main.cpp(566): warning C4018: '<': signed/unsigned mismatch
+i:\projects\emailclientsystem\emailclientsystem\emailclientsystem\main.cpp(602): warning C4018: '<': signed/unsigned mismatch
+>>>>>>> master
   emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.exe
   emailClientSystem.vcxproj -> I:\Projects\emailClientSystem\emailClientSystem\Debug\emailClientSystem.pdb (Partial PDB)

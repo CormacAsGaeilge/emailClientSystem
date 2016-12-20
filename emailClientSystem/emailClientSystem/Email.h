@@ -41,6 +41,16 @@ public:
 	bool operator>(const Email& other);
 	bool operator==(const Email& other);
 	bool operator!=(const Email& other);
+	void operator=(const Email& other)
+	{
+		Email::id = other.id;
+		Email::sender = other.sender;
+		Email::subject = other.subject;
+		Email::body = other.body;
+		Email::recipients = other.recipients;
+		Email::date = other.date;
+		Email::attachments = other.attachments;
+	}
 private:
 	unsigned int id;
 	std::string sender, subject, body;

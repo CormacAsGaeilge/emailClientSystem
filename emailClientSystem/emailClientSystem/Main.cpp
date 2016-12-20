@@ -49,12 +49,11 @@ bool attachmentsGreaterThan(Email * e1, Email * e2)
 		return false;
 }
 
-
 template <typename T>
-void swap(T* pArray, int i, int j);
+void swap(std::vector<T*> vector, int i, int j);
 
 template<typename T>
-void selectionSort(T* pArray, bool(*funct)(T*, T*), int length);
+void selectionSort(std::vector<T*> vector, bool(*funct)(T*, T*), int length);
 
 int main()
 {
@@ -76,15 +75,15 @@ int main()
 }
 
 template <typename T>
-void swap(T* pArray, int i, int j)
+void swap(std::vector<T*> vector, int i, int j)
 {
-	T temp = pArray[i];	pArray[i] = pArray[j]; 	pArray[j] = temp;
+	T* temp = vector[i];	vector[i] = vector[j]; 	vector[j] = temp;
 }
 
 template<typename T>
-void selectionSort(T* pArray, bool(*funct)(T*, T*), int length)
+void selectionSort(std::vector<T*> vector, bool(*funct)(T*, T*), int length)
 {
-	if (pArray == nullptr || length <= 0)
+	if (length <= 0)
 		return;
 
 	for (int i = 0; i < length - 1; i++)
@@ -96,7 +95,7 @@ void selectionSort(T* pArray, bool(*funct)(T*, T*), int length)
 				minPos = j;
 		}
 		if (minPos != i)
-			swap(pArray, minPos, i);
+			swap(vector, minPos, i);
 	}
 }
 void populateEmails(User &user)
@@ -562,28 +561,35 @@ void sortMenu(User *user, BoxType boxType)
 		std::cout << "(5) Back" << std::endl;
 		std::cin >> answer;
 		bool(*pFunc)(Email*, Email*);
-
-		
+		pFunc = &subjectGreaterThan;
+		std::vector<Email*> vec;
+		for (int i = 0; i < box->size(); i++)
+		{
+			vec.push_back(box->top());
+			box->pop();
+		}
 
 		switch (answer)
 		{
 		case 1:
 			
 			pFunc = &subjectGreaterThan;
-			Email *eArray;
-			//selectionSort(Email *eArray, pFunc, box->size());
+			std::cout << "Sorted by Subject.\n";
 			break;
 
 		case 2:
-			
+			pFunc = &bodyGreaterThan;
+			std::cout << "Sorted by Body.\n";
 			break;
 
 		case 3:
-
+			pFunc = &recipientsGreaterThan;
+			std::cout << "Sorted by number of Recipients.\n";
 			break;
 
 		case 4:
-
+			pFunc = &attachmentsGreaterThan;
+			std::cout << "Sorted by number of Attachments.\n";
 			break;
 
 		case 5:
@@ -592,6 +598,12 @@ void sortMenu(User *user, BoxType boxType)
 
 		default:
 			std::cout << "Bad choice! Please try again.\n";
+		}
+
+		selectionSort(vec, pFunc, box->size());
+		for (int i = 0; i < box->size(); i++)
+		{
+			box->push(vec[i]);
 		}
 	}
 	else
